@@ -1,5 +1,6 @@
 import { useDataStore } from '../../stores/dataStore';
 import { useChallengeStore } from '../../stores/challengeStore';
+import type { Champion, Content, Signal, Milestone } from '../../types/domain';
 import Card from '../common/Card';
 import SectionHeader from '../common/SectionHeader';
 
@@ -10,19 +11,19 @@ export default function OverviewView() {
   const stats = [
     {
       label: 'Active Champions',
-      value: champions.filter((c) => c.status === 'active').length,
+      value: champions.filter((c: Champion) => c.status === 'Champion').length,
       icon: '🏆',
       color: '#087CFA',
     },
     {
       label: 'Content Published',
-      value: content.filter((c) => c.status === 'published').length,
+      value: content.filter((c: Content) => c.status === 'Published').length,
       icon: '📝',
       color: '#21D789',
     },
     {
       label: 'Pending Signals',
-      value: signals.filter((s) => !s.reported).length,
+      value: signals.filter((s: Signal) => !s.reportedToProduct).length,
       icon: '📡',
       color: '#FC801D',
     },
@@ -36,8 +37,8 @@ export default function OverviewView() {
 
   const phases = ['30-day', '60-day', '90-day'];
   const getPhaseProgress = (phase: string) => {
-    const phaseItems = milestones.filter((m) => m.phase === phase);
-    const completed = phaseItems.filter((m) => m.status === 'completed').length;
+    const phaseItems = milestones.filter((m: Milestone) => m.phase === phase);
+    const completed = phaseItems.filter((m: Milestone) => m.status === 'Completed').length;
     return completed > 0 ? Math.round((completed / phaseItems.length) * 100) : 0;
   };
 

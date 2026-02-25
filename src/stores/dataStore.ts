@@ -202,59 +202,58 @@ export const useDataStore = create<DataStore>()(
             t.id === id ? { ...t, status: 'Completed' as const } : t
           ),
         })),
-      getTasksForPhaseAndWeek: (phase, week) => {
-        // This is a computed function, not persisted
+      getTasksForPhaseAndWeek: (phase: Phase, week: number): WeeklyTask[] => {
         const state = useDataStore.getState();
-        return state.weeklyTasks.filter((t) => t.phase === phase && t.week === week);
+        return state.weeklyTasks.filter((t: WeeklyTask) => t.phase === phase && t.week === week);
       },
 
       // Strategic Planning: OKRs
       okrs: SEED_OKRS,
-      addOKR: (okr) =>
+      addOKR: (okr: OKR) =>
         set((state) => ({ okrs: [...state.okrs, okr] })),
-      updateOKR: (id, updates) =>
+      updateOKR: (id: string, updates: Partial<OKR>) =>
         set((state) => ({
-          okrs: state.okrs.map((o) =>
+          okrs: state.okrs.map((o: OKR) =>
             o.id === id ? { ...o, ...updates } : o
           ),
         })),
-      updateKeyResult: (okrId, krId, updates) =>
+      updateKeyResult: (okrId: string, krId: string, updates: Partial<KeyResult>) =>
         set((state) => ({
-          okrs: state.okrs.map((o) =>
+          okrs: state.okrs.map((o: OKR) =>
             o.id === okrId
               ? {
                   ...o,
-                  keyResults: o.keyResults.map((kr) =>
+                  keyResults: o.keyResults.map((kr: KeyResult) =>
                     kr.id === krId ? { ...kr, ...updates } : kr
                   ),
                 }
               : o
           ),
         })),
-      getOKRProgress: (okrId) => {
+      getOKRProgress: (okrId: string): number => {
         const state = useDataStore.getState();
-        const okr = state.okrs.find((o) => o.id === okrId);
+        const okr = state.okrs.find((o: OKR) => o.id === okrId);
         if (!okr || okr.keyResults.length === 0) return 0;
         const completedKRs = okr.keyResults.filter(
-          (kr) => kr.current >= kr.target || kr.status === 'Completed'
+          (kr: KeyResult) => kr.current >= kr.target || kr.status === 'Completed'
         ).length;
         return Math.round((completedKRs / okr.keyResults.length) * 100);
       },
-      getPhaseProgress: (phase) => {
+      getPhaseProgress: (phase: Phase): number => {
         const state = useDataStore.getState();
-        const phaseTasks = state.weeklyTasks.filter((t) => t.phase === phase);
-        const phaseOKRs = state.okrs.filter((o) => o.phase === phase);
+        const phaseTasks = state.weeklyTasks.filter((t: WeeklyTask) => t.phase === phase);
+        const phaseOKRs = state.okrs.filter((o: OKR) => o.phase === phase);
 
         if (phaseTasks.length === 0 && phaseOKRs.length === 0) return 0;
 
         const taskProgress =
           phaseTasks.length > 0
-            ? (phaseTasks.filter((t) => t.status === 'Completed').length / phaseTasks.length) * 100
+            ? (phaseTasks.filter((t: WeeklyTask) => t.status === 'Completed').length / phaseTasks.length) * 100
             : 0;
 
         const okrProgress =
           phaseOKRs.length > 0
-            ? phaseOKRs.reduce((sum: number, okr: any) => sum + state.getOKRProgress(okr.id), 0) /
+            ? phaseOKRs.reduce((sum: number, okr: OKR) => sum + state.getOKRProgress(okr.id), 0) /
               phaseOKRs.length
             : 0;
 
@@ -263,15 +262,15 @@ export const useDataStore = create<DataStore>()(
 
       // Strategic Planning: Documents
       documents: SEED_DOCUMENTS,
-      addDocument: (doc: any) =>
+      addDocument: (doc: StrategicDocument) =>
         set((state) => ({ documents: [...state.documents, doc] })),
-      updateDocument: (id: any, updates: any) =>
+      updateDocument: (id: string, updates: Partial<StrategicDocument>) =>
         set((state) => ({
           documents: state.documents.map((d) =>
             d.id === id ? { ...d, ...updates } : d
           ),
         })),
-      deleteDocument: (id) =>
+      deleteDocument: (id: string) =>
         set((state) => ({
           documents: state.documents.filter((d) => d.id !== id),
         })),

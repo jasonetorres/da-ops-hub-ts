@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Content } from '../../types/domain';
+import type { Content, ContentType, ContentStatus } from '../../types/domain';
 import { useDataStore } from '../../stores/dataStore';
 import { useAppStore } from '../../stores/appStore';
 import Card from '../common/Card';
@@ -15,31 +15,33 @@ export default function ContentView() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState<Partial<Content>>({
     title: '',
-    type: 'blog',
-    status: 'draft',
-    url: '',
-    publishedAt: new Date(),
+    type: 'Blog Post',
+    pillar: '',
+    status: 'Idea',
+    dueDate: new Date().toISOString().split('T')[0],
+    notes: '',
   });
 
-  const contentTypes = ['blog', 'video', 'talk', 'podcast'];
-  const statuses = ['draft', 'published', 'archived'];
+  const contentTypes: ContentType[] = ['Blog Post', 'Video', 'Tweet', 'Talk', 'Podcast', 'Guide'];
+  const statuses: ContentStatus[] = ['Idea', 'Drafting', 'Review', 'Scheduled', 'Published'];
 
   const filteredContent =
-    contentFilter === 'all' ? content : content.filter((c) => c.status === contentFilter);
+    contentFilter === 'all' ? content : content.filter((c: Content) => c.status === contentFilter);
 
   const handleAdd = () => {
     if (formData.title && formData.type) {
       const newContent: Content = {
         id: Date.now().toString(),
         title: formData.title,
-        type: formData.type as any,
-        status: formData.status as any,
-        url: formData.url || '',
-        publishedAt: formData.publishedAt || new Date(),
+        type: formData.type || 'Blog Post',
+        pillar: formData.pillar || '',
+        status: formData.status || 'Idea',
+        dueDate: formData.dueDate || new Date().toISOString().split('T')[0],
+        notes: formData.notes || '',
       };
       addContent(newContent);
       setShowModal(false);
-      setFormData({ title: '', type: 'blog', status: 'draft', url: '' });
+      setFormData({ title: '', type: 'Blog Post', status: 'Idea' });
     }
   };
 
@@ -59,10 +61,12 @@ export default function ContentView() {
   };
 
   const contentIcon: Record<string, string> = {
-    blog: '📝',
-    video: '🎬',
-    talk: '🎤',
-    podcast: '🎙️',
+    'Blog Post': '📝',
+    'Video': '🎬',
+    'Tweet': '🐦',
+    'Talk': '🎤',
+    'Podcast': '🎙️',
+    'Guide': '📚',
   };
 
   return (
@@ -102,7 +106,7 @@ export default function ContentView() {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
         {filteredContent.length > 0 ? (
-          filteredContent.map((item) => (
+          filteredContent.map((item: Content) => (
             <Card key={item.id}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '12px' }}>
                 <div style={{ flex: 1 }}>
@@ -110,16 +114,16 @@ export default function ContentView() {
                     <span>{contentIcon[item.type] || '📄'}</span>
                     <h3 style={{ margin: 0, fontSize: '15px', fontWeight: '600' }}>{item.title}</h3>
                   </div>
-                  <p style={{ margin: 0, fontSize: '12px', color: 'rgba(232,237,243,0.6)' }}>{item.type}</p>
+                  <p style={{ margin: 0, fontSize: '12px', color: 'rgba(232,237,243,0.6)' }}>
+                    {item.type} • {item.pillar} • Due: {item.dueDate}
+                  </p>
                 </div>
                 <StatusPill status={item.status} />
               </div>
 
-              {item.url && (
-                <p style={{ margin: '8px 0', fontSize: '12px', color: '#087CFA' }}>
-                  <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ color: '#087CFA', textDecoration: 'none' }}>
-                    View →
-                  </a>
+              {item.notes && (
+                <p style={{ margin: '8px 0', fontSize: '12px', color: 'rgba(232,237,243,0.7)' }}>
+                  {item.notes}
                 </p>
               )}
 
@@ -173,8 +177,8 @@ export default function ContentView() {
             }}
           />
           <select
-            value={formData.type || 'blog'}
-            onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+            value={formData.type || 'Blog Post'}
+            onChange={(e) => setFormData({ ...formData, type: e.target.value as ContentType })}
             style={{
               background: 'rgba(255,255,255,0.05)',
               border: '1px solid rgba(255,255,255,0.1)',
@@ -191,10 +195,24 @@ export default function ContentView() {
             ))}
           </select>
           <input
-            type="url"
-            placeholder="URL"
-            value={formData.url || ''}
-            onChange={(e) => setFormData({ ...formData, url: e.target.value })}
+            type="text"
+            placeholder="Pillar (e.g., Productivity ROI)"
+            value={formData.pillar || ''}
+            onChange={(e) => setFormData({ ...formData, pillar: e.target.value })}
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '8px',
+              padding: '10px 12px',
+              color: '#E8EDF3',
+              fontSize: '13px',
+            }}
+          />
+          <input
+            type="date"
+            placeholder="Due Date"
+            value={formData.dueDate || ''}
+            onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
             style={{
               background: 'rgba(255,255,255,0.05)',
               border: '1px solid rgba(255,255,255,0.1)',
@@ -205,8 +223,8 @@ export default function ContentView() {
             }}
           />
           <select
-            value={formData.status || 'draft'}
-            onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+            value={formData.status || 'Idea'}
+            onChange={(e) => setFormData({ ...formData, status: e.target.value as ContentStatus })}
             style={{
               background: 'rgba(255,255,255,0.05)',
               border: '1px solid rgba(255,255,255,0.1)',
@@ -222,6 +240,21 @@ export default function ContentView() {
               </option>
             ))}
           </select>
+          <textarea
+            placeholder="Notes"
+            value={formData.notes || ''}
+            onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '8px',
+              padding: '10px 12px',
+              color: '#E8EDF3',
+              fontSize: '13px',
+              minHeight: '80px',
+              resize: 'vertical',
+            }}
+          />
         </div>
       </Modal>
     </div>

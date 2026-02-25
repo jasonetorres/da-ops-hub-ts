@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { WeeklyTask } from '../../types/domain';
 import { useDataStore } from '../../stores/dataStore';
 import SectionHeader from '../common/SectionHeader';
 import Card from '../common/Card';
@@ -22,29 +23,12 @@ export default function WeeklyTasksView() {
   const [filterTrack, setFilterTrack] = useState<'Content' | 'Community' | 'Product Bridge' | 'all'>('all');
   const [filterStatus, setFilterStatus] = useState<'Not Started' | 'In Progress' | 'Completed' | 'all'>('all');
 
-  // Get all available weeks
-  const allWeeks = Array.from(new Set(weeklyTasks.map((t: any) => t.week))).sort((a: any, b: any) => a - b);
+  const allWeeks = Array.from(new Set(weeklyTasks.map((t: WeeklyTask) => t.week))).sort((a: number, b: number) => a - b);
 
   const filtered = weeklyTasks
-    .filter((t: any) => selectedWeeks.includes(t.week))
-    .filter((t: any) => filterTrack === 'all' || t.track === filterTrack)
-    .filter((t: any) => filterStatus === 'all' || t.status === filterStatus);
-
-  const phaseWeekMap = {
-    '30-day': 'Weeks 1-4',
-    '60-day': 'Weeks 5-8',
-    '90-day': 'Weeks 9-12',
-  };
-
-  const getWeekLabel = (phase: string, week: number) => {
-    const baseWeek = phase === '30-day' ? 0 : phase === '60-day' ? 4 : 8;
-    return `Week ${baseWeek + week}`;
-  };
-
-  // Group tasks by phase and week for display organization
-  // (Helps with visual grouping)
-
-  const phases: ('30-day' | '60-day' | '90-day')[] = ['30-day', '60-day', '90-day'];
+    .filter((t: WeeklyTask) => selectedWeeks.includes(t.week))
+    .filter((t: WeeklyTask) => filterTrack === 'all' || t.track === filterTrack)
+    .filter((t: WeeklyTask) => filterStatus === 'all' || t.status === filterStatus);
 
   return (
     <div className="view">

@@ -141,7 +141,7 @@ export default function NewsView() {
         <div style={{ textAlign: 'center', padding: '40px', color: '#999' }}>Loading news...</div>
       ) : news.length > 0 ? (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          {news.map((item) => (
+          {news.map((item: NewsItem) => (
             <Card key={item.id}>
               <a
                 href={item.url}

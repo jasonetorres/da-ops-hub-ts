@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { ChallengeProgress, ChallengeStreak } from '../types/domain';
+import type { ChallengeProgress } from '../types/domain';
 
 interface ChallengeStore {
   // Progress
@@ -69,11 +69,10 @@ export const useChallengeStore = create<ChallengeStore>()(
       currentChallengeCode: '',
       setCurrentChallengeCode: (code) => set({ currentChallengeCode: code }),
 
-      // Check if today's challenge is completed
       isChallengeCompletedToday: (challengeId: number) => {
         const today = new Date().toISOString().split('T')[0];
         return get().completedChallenges.some(
-          (p) => p.challengeId === challengeId && p.completedDate === today
+          (p) => p.challengeId === challengeId.toString() && p.completedDate === today
         );
       },
 

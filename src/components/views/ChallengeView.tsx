@@ -54,11 +54,6 @@ export default function ChallengeView() {
     setTestResults([]);
   };
 
-  const difficultyColor: Record<string, string> = {
-    easy: '#21D789',
-    medium: '#FC801D',
-    hard: '#FC318C',
-  };
 
   return (
     <div className="view">

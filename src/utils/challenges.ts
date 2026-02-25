@@ -669,7 +669,7 @@ export const CHALLENGES: ChallengeData[] = [
   ...Array.from({ length: 50 }, (_, i) => ({
     id: i + 51,
     title: `Challenge ${i + 51}`,
-    difficulty: (i + 51) % 3 === 0 ? 'hard' : (i + 51) % 2 === 0 ? 'medium' : 'easy',
+    difficulty: ((i + 51) % 3 === 0 ? 'hard' : (i + 51) % 2 === 0 ? 'medium' : 'easy') as 'easy' | 'medium' | 'hard',
     description: `Complete this JavaScript challenge #${i + 51}`,
     tutorial: `This is challenge ${i + 51} tutorial content.`,
     starter: `function challenge${i + 51}() {\n  // TODO: implement\n}`,

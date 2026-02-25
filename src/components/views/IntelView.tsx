@@ -31,10 +31,10 @@ export default function IntelView() {
   const handleUpdate = () => {
     if (editingId && formData.competitor) {
       updateIntel(editingId, {
-        competitor: formData.competitor,
-        strengths: formData.strengths.split(',').map((s) => s.trim()),
-        weaknesses: formData.weaknesses.split(',').map((s) => s.trim()),
-        opportunities: formData.opportunities.split(',').map((s) => s.trim()),
+        competitor: formData.competitor as Intel['competitor'],
+        strengths: formData.strengths.split(',').map((s: string) => s.trim()),
+        weaknesses: formData.weaknesses.split(',').map((s: string) => s.trim()),
+        opportunities: formData.opportunities.split(',').map((s: string) => s.trim()),
       });
       setShowModal(false);
       setEditingId(null);
@@ -47,7 +47,7 @@ export default function IntelView() {
       <SectionHeader icon="⚔️" title="Competitive Intel" subtitle="VS Code, Cursor, Zed battlecards" />
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '16px' }}>
-        {intel.map((item) => (
+        {intel.map((item: Intel) => (
           <Card key={item.id}>
             <div style={{ marginBottom: '16px' }}>
               <h3 style={{ margin: '0 0 12px 0', fontSize: '16px', fontWeight: '600' }}>{item.competitor}</h3>
@@ -58,7 +58,7 @@ export default function IntelView() {
               <div style={{ marginBottom: '12px' }}>
                 <p style={{ margin: '0 0 8px 0', fontSize: '12px', fontWeight: '600', color: '#21D789' }}>💪 Strengths ({item.strengths.length})</p>
                 <ul style={{ margin: 0, paddingLeft: '16px', fontSize: '11px', color: 'rgba(232,237,243,0.8)', lineHeight: '1.5' }}>
-                  {item.strengths.slice(0, 3).map((s, i) => (
+                  {item.strengths.slice(0, 3).map((s: string, i: number) => (
                     <li key={i} style={{ marginBottom: '4px' }}>{s}</li>
                   ))}
                   {item.strengths.length > 3 && <li style={{ color: '#999', fontStyle: 'italic' }}>+{item.strengths.length - 3} more</li>}
@@ -70,7 +70,7 @@ export default function IntelView() {
               <div style={{ marginBottom: '12px' }}>
                 <p style={{ margin: '0 0 8px 0', fontSize: '12px', fontWeight: '600', color: '#FC318C' }}>⚠️ Weaknesses ({item.weaknesses.length})</p>
                 <ul style={{ margin: 0, paddingLeft: '16px', fontSize: '11px', color: 'rgba(232,237,243,0.8)', lineHeight: '1.5' }}>
-                  {item.weaknesses.slice(0, 3).map((w, i) => (
+                  {item.weaknesses.slice(0, 3).map((w: string, i: number) => (
                     <li key={i} style={{ marginBottom: '4px' }}>{w}</li>
                   ))}
                   {item.weaknesses.length > 3 && <li style={{ color: '#999', fontStyle: 'italic' }}>+{item.weaknesses.length - 3} more</li>}
@@ -82,7 +82,7 @@ export default function IntelView() {
               <div style={{ marginBottom: '12px' }}>
                 <p style={{ margin: '0 0 8px 0', fontSize: '12px', fontWeight: '600', color: '#FC801D' }}>🎯 Opportunities ({item.opportunities.length})</p>
                 <ul style={{ margin: 0, paddingLeft: '16px', fontSize: '11px', color: 'rgba(232,237,243,0.8)', lineHeight: '1.5' }}>
-                  {item.opportunities.slice(0, 3).map((o, i) => (
+                  {item.opportunities.slice(0, 3).map((o: string, i: number) => (
                     <li key={i} style={{ marginBottom: '4px' }}>{o}</li>
                   ))}
                   {item.opportunities.length > 3 && <li style={{ color: '#999', fontStyle: 'italic' }}>+{item.opportunities.length - 3} more</li>}

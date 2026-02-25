@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Champion } from '../../types/domain';
+import type { Champion, ChampionStatus } from '../../types/domain';
 import { useDataStore } from '../../stores/dataStore';
 import { useAppStore } from '../../stores/appStore';
 import Card from '../common/Card';
@@ -15,32 +15,39 @@ export default function ChampionsView() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState<Partial<Champion>>({
     name: '',
-    email: '',
-    platform: 'twitter',
-    status: 'active',
-    followers: 0,
+    handle: '',
+    platform: 'Twitter/X',
+    status: 'Identified',
+    audience: '',
+    contentType: '',
+    tags: [],
+    notes: '',
+    lastContact: new Date().toISOString().split('T')[0],
   });
 
-  const statuses = ['active', 'inactive', 'potential'];
-  const platforms = ['twitter', 'github', 'linkedin', 'blog'];
+  const statuses: ChampionStatus[] = ['Identified', 'Contacted', 'Engaged', 'Champion'];
+  const platforms = ['Twitter/X', 'Reddit', 'YouTube', 'GitHub', 'LinkedIn', 'Discord', 'Dev.to'] as const;
 
   const filteredChampions =
-    championsFilter === 'all' ? champions : champions.filter((c) => c.status === championsFilter);
+    championsFilter === 'all' ? champions : champions.filter((c: Champion) => c.status === championsFilter);
 
   const handleAdd = () => {
-    if (formData.name && formData.email) {
+    if (formData.name && formData.handle) {
       const newChampion: Champion = {
         id: Date.now().toString(),
         name: formData.name,
-        email: formData.email,
-        platform: formData.platform || 'twitter',
-        status: formData.status as any,
-        followers: formData.followers || 0,
-        createdAt: new Date(),
+        handle: formData.handle,
+        platform: formData.platform || 'Twitter/X',
+        status: formData.status || 'Identified',
+        audience: formData.audience || '',
+        contentType: formData.contentType || '',
+        tags: formData.tags || [],
+        notes: formData.notes || '',
+        lastContact: formData.lastContact || new Date().toISOString().split('T')[0],
       };
       addChampion(newChampion);
       setShowModal(false);
-      setFormData({ name: '', email: '', platform: 'twitter', status: 'active' });
+      setFormData({ name: '', handle: '', platform: 'Twitter/X', status: 'Identified' });
     }
   };
 
@@ -96,21 +103,22 @@ export default function ChampionsView() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
         {filteredChampions.length > 0 ? (
-          filteredChampions.map((champion) => (
+          filteredChampions.map((champion: Champion) => (
             <Card key={champion.id}>
               <div style={{ marginBottom: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '8px' }}>
                   <div>
                     <h3 style={{ margin: 0, fontSize: '15px', fontWeight: '600' }}>{champion.name}</h3>
-                    <p style={{ margin: '4px 0 0 0', fontSize: '12px', color: 'rgba(232,237,243,0.6)' }}>{champion.email}</p>
+                    <p style={{ margin: '4px 0 0 0', fontSize: '12px', color: 'rgba(232,237,243,0.6)' }}>@{champion.handle}</p>
                   </div>
                   <StatusPill status={champion.status} size="sm" />
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', fontSize: '12px', color: 'rgba(232,237,243,0.7)' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '12px', fontSize: '12px', color: 'rgba(232,237,243,0.7)' }}>
                 <span>📱 {champion.platform}</span>
-                <span>👥 {champion.followers} followers</span>
+                <span>👥 {champion.audience}</span>
+                <span>📝 {champion.contentType}</span>
               </div>
 
               <div style={{ display: 'flex', gap: '8px' }}>
@@ -165,10 +173,10 @@ export default function ChampionsView() {
             }}
           />
           <input
-            type="email"
-            placeholder="Email"
-            value={formData.email || ''}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            type="text"
+            placeholder="Handle (e.g., @username)"
+            value={formData.handle || ''}
+            onChange={(e) => setFormData({ ...formData, handle: e.target.value })}
             style={{
               background: 'rgba(255,255,255,0.05)',
               border: '1px solid rgba(255,255,255,0.1)',
@@ -179,8 +187,8 @@ export default function ChampionsView() {
             }}
           />
           <select
-            value={formData.platform || 'twitter'}
-            onChange={(e) => setFormData({ ...formData, platform: e.target.value })}
+            value={formData.platform || 'Twitter/X'}
+            onChange={(e) => setFormData({ ...formData, platform: e.target.value as Champion['platform'] })}
             style={{
               background: 'rgba(255,255,255,0.05)',
               border: '1px solid rgba(255,255,255,0.1)',
@@ -197,10 +205,24 @@ export default function ChampionsView() {
             ))}
           </select>
           <input
-            type="number"
-            placeholder="Followers"
-            value={formData.followers || 0}
-            onChange={(e) => setFormData({ ...formData, followers: parseInt(e.target.value) })}
+            type="text"
+            placeholder="Audience (e.g., Frontend Devs)"
+            value={formData.audience || ''}
+            onChange={(e) => setFormData({ ...formData, audience: e.target.value })}
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '8px',
+              padding: '10px 12px',
+              color: '#E8EDF3',
+              fontSize: '13px',
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Content Type (e.g., Tutorials)"
+            value={formData.contentType || ''}
+            onChange={(e) => setFormData({ ...formData, contentType: e.target.value })}
             style={{
               background: 'rgba(255,255,255,0.05)',
               border: '1px solid rgba(255,255,255,0.1)',
@@ -211,8 +233,8 @@ export default function ChampionsView() {
             }}
           />
           <select
-            value={formData.status || 'active'}
-            onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+            value={formData.status || 'Identified'}
+            onChange={(e) => setFormData({ ...formData, status: e.target.value as ChampionStatus })}
             style={{
               background: 'rgba(255,255,255,0.05)',
               border: '1px solid rgba(255,255,255,0.1)',
@@ -228,6 +250,21 @@ export default function ChampionsView() {
               </option>
             ))}
           </select>
+          <textarea
+            placeholder="Notes"
+            value={formData.notes || ''}
+            onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '8px',
+              padding: '10px 12px',
+              color: '#E8EDF3',
+              fontSize: '13px',
+              minHeight: '80px',
+              resize: 'vertical',
+            }}
+          />
         </div>
       </Modal>
     </div>
