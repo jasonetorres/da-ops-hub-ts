@@ -1,0 +1,54 @@
+import { useAppStore } from './stores/appStore';
+import { NAV_ITEMS } from './utils/constants';
+import './App.css';
+import MainLayout from './components/layout/MainLayout';
+import OverviewView from './components/views/OverviewView';
+import ChampionsView from './components/views/ChampionsView';
+import ContentView from './components/views/ContentView';
+import SignalsView from './components/views/SignalsView';
+import TrackerView from './components/views/TrackerView';
+import IntelView from './components/views/IntelView';
+import NewsView from './components/views/NewsView';
+import ChallengeView from './components/views/ChallengeView';
+import StrategicFrameworkView from './components/views/StrategicFrameworkView';
+import ContentStrategyView from './components/views/ContentStrategyView';
+import WeeklyTasksView from './components/views/WeeklyTasksView';
+import OKRsDashboardView from './components/views/OKRsDashboardView';
+import DocumentsView from './components/views/DocumentsView';
+import ProgressDashboardView from './components/views/ProgressDashboardView';
+
+function App() {
+  const { currentTab, setCurrentTab } = useAppStore();
+
+  const renderView = () => {
+    switch (currentTab) {
+      case 'overview': return <OverviewView />;
+      case 'champions': return <ChampionsView />;
+      case 'content': return <ContentView />;
+      case 'signals': return <SignalsView />;
+      case 'tracker': return <TrackerView />;
+      case 'intel': return <IntelView />;
+      case 'news': return <NewsView />;
+      case 'challenge': return <ChallengeView />;
+      case 'framework': return <StrategicFrameworkView />;
+      case 'content-strategy': return <ContentStrategyView />;
+      case 'weekly-tasks': return <WeeklyTasksView />;
+      case 'okrs': return <OKRsDashboardView />;
+      case 'documents': return <DocumentsView />;
+      case 'progress': return <ProgressDashboardView />;
+      default: return <OverviewView />;
+    }
+  };
+
+  return (
+    <MainLayout
+      navItems={NAV_ITEMS}
+      currentTab={currentTab}
+      onTabChange={setCurrentTab}
+    >
+      {renderView()}
+    </MainLayout>
+  );
+}
+
+export default App;

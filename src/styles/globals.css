@@ -1,0 +1,101 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: radial-gradient(ellipse at 8% 15%, rgba(8, 124, 250, 0.22) 0%, transparent 48%),
+              radial-gradient(ellipse at 85% 10%, rgba(33, 215, 137, 0.16) 0%, transparent 46%),
+              radial-gradient(ellipse at 90% 85%, rgba(252, 128, 29, 0.15) 0%, transparent 44%),
+              radial-gradient(ellipse at 15% 85%, rgba(252, 49, 140, 0.15) 0%, transparent 44%),
+              #0D1117;
+  background-attachment: fixed;
+  color: #E8EDF3;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  height: 100vh;
+  width: 100%;
+}
+
+/* JetBrains Colors */
+:root {
+  --jb-bg: #0D1117;
+  --jb-text: #E8EDF3;
+  --jb-blue: #087CFA;
+  --jb-green: #21D789;
+  --jb-pink: #FC318C;
+  --jb-orange: #FC801D;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Utility classes */
+.view {
+  background: rgba(255, 255, 255, 0.055);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.view h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #E8EDF3;
+}
+
+.view p {
+  font-size: 14px;
+  color: rgba(232, 237, 243, 0.7);
+  line-height: 1.6;
+}
+
+/* Button Styling */
+button {
+  font-family: inherit;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Text Selection */
+::selection {
+  background: rgba(8, 124, 250, 0.3);
+  color: #E8EDF3;
+}
+
+/* Placeholder Text */
+::placeholder {
+  color: rgba(232, 237, 243, 0.5);
+}
