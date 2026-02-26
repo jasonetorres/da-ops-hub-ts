@@ -198,3 +198,11 @@ export interface StrategicDocument {
   createdDate: string;
   lastUpdated: string;
 }
+
+// Tools & Resources
+export interface Resource {
+  id: string;
+  title: string;
+  url: string;
+  dateAdded: string;
+}

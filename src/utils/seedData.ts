@@ -11,6 +11,7 @@ import type {
   WeeklyTask,
   OKR,
   StrategicDocument,
+  Resource,
 } from '../types/domain';
 
 // Seed Champions
@@ -1183,5 +1184,15 @@ Every piece of content maps to one of these four narrative pillars.
     tags: ['strategy', 'content', 'pillars'],
     createdDate: '2026-02-01',
     lastUpdated: '2026-02-25',
+  },
+];
+
+// Seed Tools & Resources
+export const SEED_RESOURCES: Resource[] = [
+  {
+    id: 'res-1',
+    title: 'JetBrains Remoting Research Questionnaire',
+    url: 'https://docs.google.com/forms/d/e/1FAIpQLScyxmR-NyQ_5UxhFgkJRCjenTCdiJ9tg_rqlc-IXSwYoHQOmg/viewform?usp=publish-editor',
+    dateAdded: '2026-02-26',
   },
 ];

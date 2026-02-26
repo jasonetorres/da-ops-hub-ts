@@ -16,6 +16,7 @@ import WeeklyTasksView from './components/views/WeeklyTasksView';
 import OKRsDashboardView from './components/views/OKRsDashboardView';
 import DocumentsView from './components/views/DocumentsView';
 import ProgressDashboardView from './components/views/ProgressDashboardView';
+import ToolsAndResourcesView from './components/views/ToolsAndResourcesView';
 
 function App() {
   const { currentTab, setCurrentTab } = useAppStore();
@@ -36,6 +37,7 @@ function App() {
       case 'okrs': return <OKRsDashboardView />;
       case 'documents': return <DocumentsView />;
       case 'progress': return <ProgressDashboardView />;
+      case 'tools-resources': return <ToolsAndResourcesView />;
       default: return <OverviewView />;
     }
   };

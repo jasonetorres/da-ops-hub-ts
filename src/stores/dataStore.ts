@@ -12,6 +12,7 @@ import type {
   OKR,
   KeyResult,
   StrategicDocument,
+  Resource,
   Phase,
 } from '../types/domain';
 import {
@@ -25,6 +26,7 @@ import {
   SEED_WEEKLY_TASKS,
   SEED_OKRS,
   SEED_DOCUMENTS,
+  SEED_RESOURCES,
 } from '../utils/seedData';
 
 interface DataStore {
@@ -86,6 +88,12 @@ interface DataStore {
   addDocument: (doc: StrategicDocument) => void;
   updateDocument: (id: string, updates: Partial<StrategicDocument>) => void;
   deleteDocument: (id: string) => void;
+
+  // Tools & Resources
+  resources: Resource[];
+  addResource: (resource: Resource) => void;
+  updateResource: (id: string, updates: Partial<Resource>) => void;
+  deleteResource: (id: string) => void;
 }
 
 export const useDataStore = create<DataStore>()(
@@ -273,6 +281,21 @@ export const useDataStore = create<DataStore>()(
       deleteDocument: (id: string) =>
         set((state) => ({
           documents: state.documents.filter((d) => d.id !== id),
+        })),
+
+      // Tools & Resources
+      resources: SEED_RESOURCES,
+      addResource: (resource: Resource) =>
+        set((state) => ({ resources: [...state.resources, resource] })),
+      updateResource: (id: string, updates: Partial<Resource>) =>
+        set((state) => ({
+          resources: state.resources.map((r) =>
+            r.id === id ? { ...r, ...updates } : r
+          ),
+        })),
+      deleteResource: (id: string) =>
+        set((state) => ({
+          resources: state.resources.filter((r) => r.id !== id),
         })),
     }),
     {

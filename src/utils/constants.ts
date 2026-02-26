@@ -88,6 +88,7 @@ export const NAV_ITEMS = [
   { id: 'okrs', icon: '🎪', label: 'OKRs' },
   { id: 'documents', icon: '📄', label: 'Documents' },
   { id: 'progress', icon: '📈', label: 'Progress Dashboard' },
+  { id: 'tools-resources', icon: '🔗', label: 'Tools & Resources' },
 ];
 
 // News Sources
