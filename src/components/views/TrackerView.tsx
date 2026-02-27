@@ -107,25 +107,44 @@ export default function TrackerView() {
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                         {weekTasks.map((task: any) => (
                           <Card key={task.id}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', gap: '12px' }}>
-                              <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                <input
-                                  type="checkbox"
-                                  checked={task.status === 'Completed'}
-                                  onChange={() => completeWeeklyTask(task.id)}
-                                  style={{ cursor: 'pointer', width: '16px', height: '16px' }}
-                                />
-                                <span style={{ fontSize: '16px' }}>{TRACK_ICONS[task.track] || '📌'}</span>
-                                <div style={{ flex: 1 }}>
-                                  <h4 style={{ margin: 0, fontSize: '13px', fontWeight: '600', textDecoration: task.status === 'Completed' ? 'line-through' : 'none', color: task.status === 'Completed' ? 'rgba(232,237,243,0.5)' : '#E8EDF3' }}>
-                                    {task.title}
-                                  </h4>
-                                  <p style={{ margin: '2px 0 0 0', fontSize: '11px', color: 'rgba(232,237,243,0.5)' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px' }}>
+                              <div style={{ flex: 1, display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                                <div style={{ minWidth: '24px', paddingTop: '2px', display: 'flex', alignItems: 'center' }}>
+                                  <input
+                                    type="checkbox"
+                                    checked={task.status === 'Completed'}
+                                    onChange={() => completeWeeklyTask(task.id)}
+                                    style={{
+                                      cursor: 'pointer',
+                                      width: '20px',
+                                      height: '20px',
+                                      minWidth: '20px',
+                                      flexShrink: 0,
+                                    }}
+                                    aria-label={`Mark "${task.title}" as ${task.status === 'Completed' ? 'incomplete' : 'complete'}`}
+                                  />
+                                </div>
+                                <div style={{ flex: 1, minWidth: 0 }}>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                                    <span style={{ fontSize: '16px', flexShrink: 0 }}>{TRACK_ICONS[task.track] || '📌'}</span>
+                                    <h4 style={{
+                                      margin: 0,
+                                      fontSize: '13px',
+                                      fontWeight: '600',
+                                      textDecoration: task.status === 'Completed' ? 'line-through' : 'none',
+                                      color: task.status === 'Completed' ? 'rgba(232,237,243,0.5)' : '#E8EDF3',
+                                    }}>
+                                      {task.title}
+                                    </h4>
+                                  </div>
+                                  <p style={{ margin: '2px 0 0 0', fontSize: '11px', color: 'rgba(232,237,243,0.5)', lineHeight: '1.4' }}>
                                     {task.description}
                                   </p>
                                 </div>
                               </div>
-                              <StatusPill status={task.status} size="sm" />
+                              <div style={{ flexShrink: 0, paddingTop: '2px' }}>
+                                <StatusPill status={task.status} size="sm" />
+                              </div>
                             </div>
                           </Card>
                         ))}
