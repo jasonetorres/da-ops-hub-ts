@@ -32,39 +32,43 @@ export default function Sidebar({ items, currentTab, onTabChange }: SidebarProps
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
         {items.map((item) => (
           <button
             key={item.id}
             onClick={() => onTabChange(item.id)}
             style={{
               all: 'unset',
-              padding: '12px 12px',
+              padding: '10px 12px',
               borderRadius: '8px',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '10px',
+              gap: '12px',
               fontSize: '13px',
               fontWeight: currentTab === item.id ? '600' : '500',
-              color: currentTab === item.id ? '#E8EDF3' : 'rgba(232,237,243,0.7)',
-              background: currentTab === item.id ? 'rgba(8,124,250,0.15)' : 'transparent',
-              border: currentTab === item.id ? '1px solid rgba(8,124,250,0.3)' : 'none',
-              transition: 'all 0.2s',
+              color: currentTab === item.id ? '#E8EDF3' : 'rgba(232,237,243,0.65)',
+              background: currentTab === item.id ? 'linear-gradient(135deg, rgba(8,124,250,0.2) 0%, rgba(8,124,250,0.12) 100%)' : 'transparent',
+              border: currentTab === item.id ? '1px solid rgba(8,124,250,0.35)' : '1px solid transparent',
+              transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
             onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLElement;
               if (currentTab !== item.id) {
-                (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)';
+                el.style.background = 'rgba(255, 255, 255, 0.06)';
+                el.style.color = 'rgba(232,237,243,0.85)';
               }
             }}
             onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLElement;
               if (currentTab !== item.id) {
-                (e.currentTarget as HTMLElement).style.background = 'transparent';
+                el.style.background = 'transparent';
+                el.style.color = 'rgba(232,237,243,0.65)';
               }
             }}
           >
-            <span style={{ fontSize: '16px' }}>{item.icon}</span>
-            <span>{item.label}</span>
+            <span style={{ fontSize: '16px', flexShrink: 0 }}>{item.icon}</span>
+            <span style={{ flex: 1, textAlign: 'left' }}>{item.label}</span>
           </button>
         ))}
       </div>
