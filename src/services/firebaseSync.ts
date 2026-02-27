@@ -42,6 +42,8 @@ export function initializeFirebaseSync() {
  * Sync data to Firebase
  * Called whenever data changes in Zustand store
  * Gracefully degrades if Firebase is not configured
+ *
+ * Only syncs serializable data, not action functions
  */
 export async function syncDataToFirebase(data: DataState) {
   if (!isFirebaseConfigured || !database) {
@@ -51,7 +53,24 @@ export async function syncDataToFirebase(data: DataState) {
 
   try {
     const dataRef = ref(database, DATA_PATH);
-    await set(dataRef, data);
+
+    // Extract only the data properties (not functions)
+    // Firebase can only store JSON-serializable values
+    const serializableData = {
+      champions: data.champions,
+      content: data.content,
+      signals: data.signals,
+      milestones: data.milestones,
+      intel: data.intel,
+      strategicPillars: data.strategicPillars,
+      contentPillars: data.contentPillars,
+      weeklyTasks: data.weeklyTasks,
+      okrs: data.okrs,
+      documents: data.documents,
+      resources: data.resources,
+    };
+
+    await set(dataRef, serializableData);
   } catch (error) {
     console.error('Firebase sync write error:', error);
     // Data still updates locally, Firebase sync just failed
