@@ -91,7 +91,7 @@ export default function IntelView() {
             )}
 
             <Button onClick={() => handleEdit(item)} variant="secondary" size="sm">
-              View Full Battlecard
+              Edit Battlecard
             </Button>
           </Card>
         ))}
