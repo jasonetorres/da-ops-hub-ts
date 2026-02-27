@@ -63,10 +63,10 @@ export default function ChallengeView() {
         subtitle="100 JavaScript challenges with tests and tutorials"
       />
 
-      <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
+      <div className="responsive-grid cols-3" style={{ marginBottom: '24px' }}>
         <Card>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '32px', fontWeight: '600', color: '#087CFA', marginBottom: '4px' }}>
+            <div style={{ fontSize: 'clamp(24px, 5vw, 32px)', fontWeight: '600', color: '#087CFA', marginBottom: '4px' }}>
               {streak.current}
             </div>
             <div style={{ fontSize: '12px', color: 'rgba(232,237,243,0.6)' }}>Current Streak</div>
@@ -74,7 +74,7 @@ export default function ChallengeView() {
         </Card>
         <Card>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '32px', fontWeight: '600', color: '#21D789', marginBottom: '4px' }}>
+            <div style={{ fontSize: 'clamp(24px, 5vw, 32px)', fontWeight: '600', color: '#21D789', marginBottom: '4px' }}>
               {completedChallenges.length}
             </div>
             <div style={{ fontSize: '12px', color: 'rgba(232,237,243,0.6)' }}>Completed</div>
@@ -82,7 +82,7 @@ export default function ChallengeView() {
         </Card>
         <Card>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '32px', fontWeight: '600', color: '#FC801D', marginBottom: '4px' }}>
+            <div style={{ fontSize: 'clamp(24px, 5vw, 32px)', fontWeight: '600', color: '#FC801D', marginBottom: '4px' }}>
               {CHALLENGES.length}
             </div>
             <div style={{ fontSize: '12px', color: 'rgba(232,237,243,0.6)' }}>Total</div>
@@ -90,7 +90,7 @@ export default function ChallengeView() {
         </Card>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+      <div className="responsive-grid cols-2">
         <Card>
           <div style={{ marginBottom: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
@@ -124,23 +124,27 @@ export default function ChallengeView() {
                 background: 'transparent',
                 border: 'none',
                 color: '#E8EDF3',
-                fontSize: '12px',
+                fontSize: 'clamp(11px, 2vw, 12px)',
                 fontFamily: 'monospace',
                 width: '100%',
-                minHeight: '120px',
-                resize: 'none',
+                minHeight: 'clamp(100px, 30vh, 300px)',
+                resize: 'vertical',
                 outline: 'none',
               }}
             />
           </div>
 
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <Button onClick={runTests} variant="primary">
-              Run Tests
-            </Button>
-            <Button onClick={() => setShowSolution(!showSolution)} variant="secondary">
-              {showSolution ? 'Hide Solution' : 'Show Solution'}
-            </Button>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            <div style={{ flex: 1, minWidth: '100px' }}>
+              <Button onClick={runTests} variant="primary">
+                Run Tests
+              </Button>
+            </div>
+            <div style={{ flex: 1, minWidth: '100px' }}>
+              <Button onClick={() => setShowSolution(!showSolution)} variant="secondary">
+                {showSolution ? 'Hide' : 'Show'}
+              </Button>
+            </div>
           </div>
 
           {showSolution && (
@@ -219,13 +223,17 @@ export default function ChallengeView() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <Button onClick={handlePrev} variant="secondary" disabled={currentIndex === 0}>
-              ← Prev
-            </Button>
-            <Button onClick={handleNext} variant="secondary" disabled={currentIndex === CHALLENGES.length - 1}>
-              Next →
-            </Button>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            <div style={{ flex: 1, minWidth: '80px' }}>
+              <Button onClick={handlePrev} variant="secondary" disabled={currentIndex === 0}>
+                ← Prev
+              </Button>
+            </div>
+            <div style={{ flex: 1, minWidth: '80px' }}>
+              <Button onClick={handleNext} variant="secondary" disabled={currentIndex === CHALLENGES.length - 1}>
+                Next →
+              </Button>
+            </div>
           </div>
         </Card>
       </div>
