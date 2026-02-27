@@ -5,10 +5,13 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ items, currentTab, onTabChange }: SidebarProps) {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
   return (
     <nav
       style={{
-        width: '240px',
+        width: isMobile ? '240px' : '240px',
+        minWidth: '240px',
         background: 'rgba(20, 30, 50, 0.6)',
         borderRight: '1px solid rgba(255, 255, 255, 0.07)',
         display: 'flex',
@@ -16,6 +19,8 @@ export default function Sidebar({ items, currentTab, onTabChange }: SidebarProps
         padding: '16px',
         gap: '8px',
         overflowY: 'auto',
+        overflowX: 'hidden',
+        height: '100vh',
       }}
     >
       <div style={{ padding: '12px 0 24px', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>

@@ -7,6 +7,8 @@ interface CardProps {
 }
 
 export default function Card({ children, className = '', onClick }: CardProps) {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
   return (
     <div
       onClick={onClick}
@@ -14,9 +16,11 @@ export default function Card({ children, className = '', onClick }: CardProps) {
         background: 'rgba(20, 30, 50, 0.5)',
         border: '1px solid rgba(255, 255, 255, 0.07)',
         borderRadius: '12px',
-        padding: '16px',
+        padding: isMobile ? '12px' : '16px',
         cursor: onClick ? 'pointer' : 'default',
         transition: 'all 0.2s',
+        width: '100%',
+        overflow: 'hidden',
       }}
       className={className}
       onMouseEnter={(e) => {

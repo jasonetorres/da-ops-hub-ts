@@ -6,34 +6,47 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
+  height: 100%;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
   text-align: left;
+  display: flex;
+  overflow: hidden;
+  position: relative;
 }
 
 .view {
   width: 100%;
   padding: 0;
+  overflow-x: hidden;
 }
 
 /* Responsive layout */
 @media (max-width: 768px) {
   .view {
     padding: 0;
+    width: 100vw;
   }
 
   main {
-    padding: 16px !important;
+    padding: 60px 12px 16px !important;
   }
 }
 
 @media (max-width: 480px) {
   main {
-    padding: 12px !important;
+    padding: 60px 8px 16px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  main {
+    padding: 32px !important;
   }
 }
 
@@ -52,7 +65,7 @@ html, body {
   }
 }
 
-@media (min-width: 768px) and (max-width: 1199px) {
+@media (min-width: 769px) and (max-width: 1199px) {
   .responsive-grid.cols-2 {
     grid-template-columns: 1fr;
   }
@@ -61,12 +74,16 @@ html, body {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .responsive-grid.cols-2 {
     grid-template-columns: 1fr;
   }
   .responsive-grid.cols-3 {
     grid-template-columns: 1fr;
+  }
+
+  .responsive-grid {
+    gap: 12px;
   }
 
   .responsive-flex {
@@ -75,44 +92,77 @@ html, body {
   }
 }
 
-/* Sidebar responsive */
+/* Sidebar responsive - target the nav element with 240px width */
 @media (max-width: 768px) {
-  [style*="width: 200px"] {
-    width: 70px !important;
+  nav[style*="width: 240px"] {
+    width: 200px !important;
+    position: fixed;
+    left: -100%;
+    top: 0;
+    height: 100vh;
+    z-index: 1001;
+    transition: left 0.3s ease;
   }
 
-  [style*="width: 200px"] span {
-    display: none;
-  }
-
-  [style*="width: 200px"] button {
-    justify-content: center;
-    padding: 12px 8px !important;
+  nav[style*="width: 240px"].sidebar-open {
+    left: 0 !important;
   }
 }
 
 /* Typography responsive */
 h1 {
   font-size: clamp(1.5rem, 5vw, 2.5rem);
+  margin: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 h2 {
   font-size: clamp(1.2rem, 4vw, 1.8rem);
+  margin: 0;
+  overflow-wrap: break-word;
 }
 
 h3 {
   font-size: clamp(1rem, 3vw, 1.4rem);
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+h4 {
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+p {
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* Input responsive */
 input, textarea, select {
   font-size: 16px; /* Prevents zoom on mobile */
+  max-width: 100%;
 }
 
 @media (max-width: 480px) {
   input, textarea, select {
     min-height: 44px; /* Touch target */
+    max-width: 100%;
   }
+}
+
+/* Ensure all button text wraps */
+button {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Ensure links don't cause overflow */
+a {
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .logo {
