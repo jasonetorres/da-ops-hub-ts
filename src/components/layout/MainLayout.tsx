@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import Sidebar from './Sidebar';
+import FirebaseStatus from '../common/FirebaseStatus';
 
 interface MainLayoutProps {
   navItems: Array<{ id: string; icon: string; label: string }>;
@@ -128,8 +129,20 @@ export default function MainLayout({
           width: '100%',
           minHeight: '100vh',
           maxWidth: isMobile ? '100vw' : 'calc(100vw - 240px)',
+          position: 'relative',
         }}
       >
+        {/* Firebase Status Indicator */}
+        <div
+          style={{
+            position: 'fixed',
+            top: isMobile ? '60px' : '16px',
+            right: '16px',
+            zIndex: 100,
+          }}
+        >
+          <FirebaseStatus />
+        </div>
         {children}
       </main>
     </div>

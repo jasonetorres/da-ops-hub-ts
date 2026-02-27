@@ -29,7 +29,75 @@ import {
   SEED_RESOURCES,
 } from '../utils/seedData';
 
-interface DataStore {
+export interface DataState {
+  // Champions
+  champions: Champion[];
+  addChampion: (champion: Champion) => void;
+  updateChampion: (id: string, updates: Partial<Champion>) => void;
+  deleteChampion: (id: string) => void;
+
+  // Content
+  content: Content[];
+  addContent: (item: Content) => void;
+  updateContent: (id: string, updates: Partial<Content>) => void;
+  deleteContent: (id: string) => void;
+
+  // Signals
+  signals: Signal[];
+  addSignal: (signal: Signal) => void;
+  updateSignal: (id: string, updates: Partial<Signal>) => void;
+  deleteSignal: (id: string) => void;
+  markSignalReported: (id: string) => void;
+
+  // Milestones
+  milestones: Milestone[];
+  updateMilestoneStatus: (id: string, status: 'Not Started' | 'In Progress' | 'Completed') => void;
+
+  // Intel
+  intel: Intel[];
+  updateIntel: (id: string, updates: Partial<Intel>) => void;
+
+  // Strategic Planning: Pillars
+  strategicPillars: StrategicPillar[];
+  addStrategicPillar: (pillar: StrategicPillar) => void;
+  updateStrategicPillar: (id: string, updates: Partial<StrategicPillar>) => void;
+  deleteStrategicPillar: (id: string) => void;
+
+  // Strategic Planning: Content Pillars
+  contentPillars: ContentPillar[];
+  addContentPillar: (pillar: ContentPillar) => void;
+  updateContentPillar: (id: string, updates: Partial<ContentPillar>) => void;
+
+  // Strategic Planning: Weekly Tasks
+  weeklyTasks: WeeklyTask[];
+  addWeeklyTask: (task: WeeklyTask) => void;
+  updateWeeklyTask: (id: string, updates: Partial<WeeklyTask>) => void;
+  completeWeeklyTask: (id: string) => void;
+  resetAllWeeklyTasks: () => void;
+  getTasksForPhaseAndWeek: (phase: Phase, week: number) => WeeklyTask[];
+
+  // Strategic Planning: OKRs
+  okrs: OKR[];
+  addOKR: (okr: OKR) => void;
+  updateOKR: (id: string, updates: Partial<OKR>) => void;
+  updateKeyResult: (okrId: string, krId: string, updates: Partial<KeyResult>) => void;
+  getOKRProgress: (okrId: string) => number; // 0-100
+  getPhaseProgress: (phase: Phase) => number; // 0-100
+
+  // Strategic Planning: Documents
+  documents: StrategicDocument[];
+  addDocument: (doc: StrategicDocument) => void;
+  updateDocument: (id: string, updates: Partial<StrategicDocument>) => void;
+  deleteDocument: (id: string) => void;
+
+  // Tools & Resources
+  resources: Resource[];
+  addResource: (resource: Resource) => void;
+  updateResource: (id: string, updates: Partial<Resource>) => void;
+  deleteResource: (id: string) => void;
+}
+
+interface DataStore extends DataState {
   // Champions
   champions: Champion[];
   addChampion: (champion: Champion) => void;
@@ -305,6 +373,37 @@ export const useDataStore = create<DataStore>()(
     }),
     {
       name: 'da-ops-hub-data',
+      onRehydrateStorage: () => (state) => {
+        // After hydration, initialize Firebase sync
+        if (state) {
+          import('../services/firebaseSync')
+            .then(({ syncDataToFirebase }) => {
+              syncDataToFirebase(state);
+            })
+            .catch(() => {
+              // Firebase not available or not configured - that's ok
+            });
+        }
+      },
     }
   )
+);
+
+// Subscribe to all store changes and sync to Firebase
+let firebaseSyncTimeout: ReturnType<typeof setTimeout> | null = null;
+useDataStore.subscribe(
+  (state) => {
+    // Debounce Firebase writes to avoid too many requests
+    if (firebaseSyncTimeout) {
+      clearTimeout(firebaseSyncTimeout);
+    }
+    firebaseSyncTimeout = setTimeout(async () => {
+      try {
+        const { syncDataToFirebase } = await import('../services/firebaseSync');
+        await syncDataToFirebase(state as DataState);
+      } catch (error) {
+        // Firebase sync failed but local state is fine
+      }
+    }, 500);
+  }
 );

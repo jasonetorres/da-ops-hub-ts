@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useAppStore } from './stores/appStore';
 import { useDataStore } from './stores/dataStore';
 import { NAV_ITEMS } from './utils/constants';
+import { initializeFirebaseSync } from './services/firebaseSync';
 import './App.css';
 import MainLayout from './components/layout/MainLayout';
 import OverviewView from './components/views/OverviewView';
@@ -23,11 +24,15 @@ import ToolsAndResourcesView from './components/views/ToolsAndResourcesView';
 function App() {
   const { currentTab, setCurrentTab } = useAppStore();
 
-  // Sync data across browser tabs/windows
+  // Initialize Firebase sync and cross-tab synchronization
   useEffect(() => {
+    // Initialize Firebase real-time sync for cross-device synchronization
+    initializeFirebaseSync();
+
+    // Also keep localStorage sync for same-browser tab synchronization
     const handleStorageChange = (event: StorageEvent) => {
       if (event.key === 'da-ops-hub-data' && event.newValue) {
-        // Rehydrate the store from the updated localStorage
+        // Rehydrate the store from localStorage (for same-browser tabs)
         try {
           const newData = JSON.parse(event.newValue);
           if (newData.state) {
