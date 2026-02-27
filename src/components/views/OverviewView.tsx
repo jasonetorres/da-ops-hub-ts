@@ -1,4 +1,5 @@
 import { useDataStore } from '../../stores/dataStore';
+import { useAppStore } from '../../stores/appStore';
 import { useChallengeStore } from '../../stores/challengeStore';
 import type { Champion, Content, Signal, Milestone } from '../../types/domain';
 import Card from '../common/Card';
@@ -6,6 +7,7 @@ import SectionHeader from '../common/SectionHeader';
 
 export default function OverviewView() {
   const { champions, content, signals, milestones, intel } = useDataStore();
+  const { setCurrentTab } = useAppStore();
   const { completedChallenges, streak } = useChallengeStore();
 
   const stats = [
@@ -14,24 +16,28 @@ export default function OverviewView() {
       value: champions.filter((c: Champion) => c.status === 'Champion').length,
       icon: '🏆',
       color: '#087CFA',
+      page: 'champions',
     },
     {
       label: 'Content Published',
       value: content.filter((c: Content) => c.status === 'Published').length,
       icon: '📝',
       color: '#21D789',
+      page: 'content',
     },
     {
       label: 'Pending Signals',
       value: signals.filter((s: Signal) => !s.reportedToProduct).length,
       icon: '📡',
       color: '#FC801D',
+      page: 'signals',
     },
     {
       label: 'Challenges Completed',
       value: completedChallenges.length,
       icon: '💡',
       color: '#FC318C',
+      page: 'challenge',
     },
   ];
 
@@ -54,25 +60,50 @@ export default function OverviewView() {
     '90-day': '#FC318C',
   };
 
+  const navigationMap: Record<string, string> = {
+    '30-day': 'tracker',
+    '60-day': 'tracker',
+    '90-day': 'tracker',
+  };
+
+  const handleStatClick = (page: string) => {
+    setCurrentTab(page);
+  };
+
+  const handlePhaseClick = (phase: string) => {
+    setCurrentTab(navigationMap[phase]);
+  };
+
+  const handleQuickStatClick = (page: string) => {
+    setCurrentTab(page);
+  };
+
   return (
     <div className="view">
       <SectionHeader
         icon="📊"
         title="Overview Dashboard"
-        subtitle="Champion metrics, content status, signal insights"
+        subtitle="Champion metrics, content status, signal insights - Click any card to navigate"
       />
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '32px' }}>
         {stats.map((stat) => (
-          <Card key={stat.label}>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '28px', marginBottom: '8px' }}>{stat.icon}</div>
-              <div style={{ fontSize: '32px', fontWeight: '600', color: stat.color, marginBottom: '4px' }}>
-                {stat.value}
+          <div
+            key={stat.label}
+            onClick={() => handleStatClick(stat.page)}
+            style={{ cursor: 'pointer' }}
+          >
+            <Card>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '28px', marginBottom: '8px' }}>{stat.icon}</div>
+                <div style={{ fontSize: '32px', fontWeight: '600', color: stat.color, marginBottom: '4px' }}>
+                  {stat.value}
+                </div>
+                <div style={{ fontSize: '12px', color: 'rgba(232,237,243,0.6)' }}>{stat.label}</div>
+                <div style={{ fontSize: '10px', color: 'rgba(232,237,243,0.4)', marginTop: '8px' }}>Click to view →</div>
               </div>
-              <div style={{ fontSize: '12px', color: 'rgba(232,237,243,0.6)' }}>{stat.label}</div>
-            </div>
-          </Card>
+            </Card>
+          </div>
         ))}
       </div>
 
@@ -83,30 +114,37 @@ export default function OverviewView() {
           {phases.map((phase) => {
             const progress = getPhaseProgress(phase);
             return (
-              <Card key={phase}>
-                <div style={{ marginBottom: '12px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <span>{phaseIcon[phase]}</span>
-                    <h3 style={{ margin: 0, fontSize: '14px', fontWeight: '600' }}>
-                      {phase.charAt(0).toUpperCase() + phase.slice(1)}
-                    </h3>
+              <div
+                key={phase}
+                onClick={() => handlePhaseClick(phase)}
+                style={{ cursor: 'pointer' }}
+              >
+                <Card>
+                  <div style={{ marginBottom: '12px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                      <span>{phaseIcon[phase]}</span>
+                      <h3 style={{ margin: 0, fontSize: '14px', fontWeight: '600' }}>
+                        {phase.charAt(0).toUpperCase() + phase.slice(1)}
+                      </h3>
+                    </div>
+                    <div style={{ fontSize: '24px', fontWeight: '600', color: phaseColor[phase] }}>
+                      {progress}%
+                    </div>
                   </div>
-                  <div style={{ fontSize: '24px', fontWeight: '600', color: phaseColor[phase] }}>
-                    {progress}%
-                  </div>
-                </div>
 
-                <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '6px', height: '6px', overflow: 'hidden' }}>
-                  <div
-                    style={{
-                      background: phaseColor[phase],
-                      height: '100%',
-                      width: `${progress}%`,
-                      transition: 'width 0.3s',
-                    }}
-                  />
-                </div>
-              </Card>
+                  <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '6px', height: '6px', overflow: 'hidden' }}>
+                    <div
+                      style={{
+                        background: phaseColor[phase],
+                        height: '100%',
+                        width: `${progress}%`,
+                        transition: 'width 0.3s',
+                      }}
+                    />
+                  </div>
+                  <div style={{ fontSize: '10px', color: 'rgba(232,237,243,0.4)', marginTop: '8px', textAlign: 'center' }}>Click to view tasks →</div>
+                </Card>
+              </div>
             );
           })}
         </div>
@@ -116,24 +154,30 @@ export default function OverviewView() {
         <div>
           <h2 style={{ margin: '0 0 16px 0', fontSize: '18px', fontWeight: '600' }}>🎯 Quick Stats</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <Card>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '13px', color: 'rgba(232,237,243,0.8)' }}>Total Champions</span>
-                <span style={{ fontSize: '16px', fontWeight: '600', color: '#087CFA' }}>{champions.length}</span>
-              </div>
-            </Card>
-            <Card>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '13px', color: 'rgba(232,237,243,0.8)' }}>Content Pipeline</span>
-                <span style={{ fontSize: '16px', fontWeight: '600', color: '#FC801D' }}>{content.length}</span>
-              </div>
-            </Card>
-            <Card>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '13px', color: 'rgba(232,237,243,0.8)' }}>Competitors Tracked</span>
-                <span style={{ fontSize: '16px', fontWeight: '600', color: '#FC318C' }}>{intel.length}</span>
-              </div>
-            </Card>
+            <div onClick={() => handleQuickStatClick('champions')} style={{ cursor: 'pointer' }}>
+              <Card>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '13px', color: 'rgba(232,237,243,0.8)' }}>Total Champions</span>
+                  <span style={{ fontSize: '16px', fontWeight: '600', color: '#087CFA' }}>{champions.length}</span>
+                </div>
+              </Card>
+            </div>
+            <div onClick={() => handleQuickStatClick('content')} style={{ cursor: 'pointer' }}>
+              <Card>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '13px', color: 'rgba(232,237,243,0.8)' }}>Content Pipeline</span>
+                  <span style={{ fontSize: '16px', fontWeight: '600', color: '#FC801D' }}>{content.length}</span>
+                </div>
+              </Card>
+            </div>
+            <div onClick={() => handleQuickStatClick('intel')} style={{ cursor: 'pointer' }}>
+              <Card>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '13px', color: 'rgba(232,237,243,0.8)' }}>Competitors Tracked</span>
+                  <span style={{ fontSize: '16px', fontWeight: '600', color: '#FC318C' }}>{intel.length}</span>
+                </div>
+              </Card>
+            </div>
           </div>
         </div>
 
