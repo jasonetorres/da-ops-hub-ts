@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { useAppStore } from './stores/appStore';
+import { useDataStore } from './stores/dataStore';
 import { NAV_ITEMS } from './utils/constants';
 import './App.css';
 import MainLayout from './components/layout/MainLayout';
@@ -20,6 +22,26 @@ import ToolsAndResourcesView from './components/views/ToolsAndResourcesView';
 
 function App() {
   const { currentTab, setCurrentTab } = useAppStore();
+
+  // Sync data across browser tabs/windows
+  useEffect(() => {
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === 'da-ops-hub-data' && event.newValue) {
+        // Rehydrate the store from the updated localStorage
+        try {
+          const newData = JSON.parse(event.newValue);
+          if (newData.state) {
+            useDataStore.setState(newData.state, true);
+          }
+        } catch (error) {
+          console.error('Failed to sync data from storage:', error);
+        }
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
   const renderView = () => {
     switch (currentTab) {
