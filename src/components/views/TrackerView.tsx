@@ -8,6 +8,8 @@ import SectionHeader from '../common/SectionHeader';
 export default function TrackerView() {
   const { milestones, updateMilestoneStatus, weeklyTasks, completeWeeklyTask } = useDataStore();
   const [showTasksView, setShowTasksView] = useState(true);
+  const [expandedTaskId, setExpandedTaskId] = useState<string | null>(null);
+  const [taskNotes, setTaskNotes] = useState<Record<string, string>>({});
 
   const phaseColor: Record<string, string> = {
     '30-day': '#087CFA',
@@ -106,14 +108,20 @@ export default function TrackerView() {
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                         {weekTasks.map((task: any) => (
-                          <Card key={task.id}>
+                          <Card
+                            key={task.id}
+                            onClick={() => setExpandedTaskId(expandedTaskId === task.id ? null : task.id)}
+                          >
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px' }}>
-                              <div style={{ flex: 1, display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                              <div style={{ flex: 1, display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', userSelect: 'none' }}>
                                 <div style={{ minWidth: '24px', paddingTop: '2px', display: 'flex', alignItems: 'center' }}>
                                   <input
                                     type="checkbox"
                                     checked={task.status === 'Completed'}
-                                    onChange={() => completeWeeklyTask(task.id)}
+                                    onChange={(e) => {
+                                      e.stopPropagation();
+                                      completeWeeklyTask(task.id);
+                                    }}
                                     style={{
                                       cursor: 'pointer',
                                       width: '20px',
@@ -146,6 +154,34 @@ export default function TrackerView() {
                                 <StatusPill status={task.status} size="sm" />
                               </div>
                             </div>
+
+                            {/* Expanded details section */}
+                            {expandedTaskId === task.id && (
+                              <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+                                <div style={{ marginBottom: '12px' }}>
+                                  <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', marginBottom: '6px', color: 'rgba(232,237,243,0.7)' }}>
+                                    📝 Notes & Progress
+                                  </label>
+                                  <textarea
+                                    value={taskNotes[task.id] || task.notes || ''}
+                                    onChange={(e) => setTaskNotes({ ...taskNotes, [task.id]: e.target.value })}
+                                    placeholder="Add notes, blockers, or progress updates..."
+                                    style={{
+                                      width: '100%',
+                                      minHeight: '80px',
+                                      padding: '8px',
+                                      fontSize: '12px',
+                                      borderRadius: '6px',
+                                      border: '1px solid rgba(8, 124, 250, 0.2)',
+                                      background: 'rgba(8, 124, 250, 0.05)',
+                                      color: '#E8EDF3',
+                                      fontFamily: 'inherit',
+                                      resize: 'vertical',
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                            )}
                           </Card>
                         ))}
                       </div>
