@@ -24,8 +24,21 @@ export function initializeFirebaseSync() {
       (snapshot) => {
         if (snapshot.exists()) {
           const firebaseData = snapshot.val();
-          // Update Zustand store with Firebase data
-          useDataStore.setState(firebaseData as DataState, true);
+          // Update only data properties, preserving action functions
+          // Use shallow merge (no replace: true) to preserve actions
+          useDataStore.setState({
+            champions: firebaseData.champions,
+            content: firebaseData.content,
+            signals: firebaseData.signals,
+            milestones: firebaseData.milestones,
+            intel: firebaseData.intel,
+            strategicPillars: firebaseData.strategicPillars,
+            contentPillars: firebaseData.contentPillars,
+            weeklyTasks: firebaseData.weeklyTasks,
+            okrs: firebaseData.okrs,
+            documents: firebaseData.documents,
+            resources: firebaseData.resources,
+          });
         }
       },
       (error) => {
