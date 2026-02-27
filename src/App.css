@@ -259,22 +259,7 @@ a:hover {
 }
 
 /* ===== SIDEBAR ===== */
-
-@media (max-width: 768px) {
-  nav[style*="width: 240px"] {
-    width: 240px !important;
-    position: fixed;
-    left: -100%;
-    top: 0;
-    height: 100vh;
-    z-index: 1001;
-    transition: left 0.3s ease;
-  }
-
-  nav[style*="width: 240px"].sidebar-open {
-    left: 0 !important;
-  }
-}
+/* Sidebar positioning is handled by inline styles in MainLayout with transform: translateX() */
 
 /* ===== UTILITIES ===== */
 
