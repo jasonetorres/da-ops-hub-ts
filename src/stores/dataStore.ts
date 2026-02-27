@@ -73,6 +73,7 @@ interface DataStore {
   addWeeklyTask: (task: WeeklyTask) => void;
   updateWeeklyTask: (id: string, updates: Partial<WeeklyTask>) => void;
   completeWeeklyTask: (id: string) => void;
+  resetAllWeeklyTasks: () => void;
   getTasksForPhaseAndWeek: (phase: Phase, week: number) => WeeklyTask[];
 
   // Strategic Planning: OKRs
@@ -207,8 +208,12 @@ export const useDataStore = create<DataStore>()(
       completeWeeklyTask: (id) =>
         set((state) => ({
           weeklyTasks: state.weeklyTasks.map((t) =>
-            t.id === id ? { ...t, status: 'Completed' as const } : t
+            t.id === id ? { ...t, status: t.status === 'Completed' ? 'In Progress' : 'Completed' } : t
           ),
+        })),
+      resetAllWeeklyTasks: () =>
+        set((state) => ({
+          weeklyTasks: state.weeklyTasks.map((t) => ({ ...t, status: 'In Progress' })),
         })),
       getTasksForPhaseAndWeek: (phase: Phase, week: number): WeeklyTask[] => {
         const state = useDataStore.getState();

@@ -6,7 +6,7 @@ import StatusPill from '../common/StatusPill';
 import SectionHeader from '../common/SectionHeader';
 
 export default function TrackerView() {
-  const { milestones, updateMilestoneStatus, weeklyTasks, completeWeeklyTask } = useDataStore();
+  const { milestones, updateMilestoneStatus, weeklyTasks, completeWeeklyTask, resetAllWeeklyTasks } = useDataStore();
   const [showTasksView, setShowTasksView] = useState(true);
   const [expandedTaskId, setExpandedTaskId] = useState<string | null>(null);
   const [taskNotes, setTaskNotes] = useState<Record<string, string>>({});
@@ -46,22 +46,37 @@ export default function TrackerView() {
         subtitle="Phase-based roadmap with weekly execution tasks"
       />
 
-      {/* View Toggle */}
-      <div style={{ display: 'flex', gap: '8px', marginBottom: '24px' }}>
-        <Button
-          onClick={() => setShowTasksView(true)}
-          variant={showTasksView ? 'primary' : 'secondary'}
-          size="sm"
-        >
-          📋 Weekly Tasks ({weeklyTasks.length})
-        </Button>
-        <Button
-          onClick={() => setShowTasksView(false)}
-          variant={!showTasksView ? 'primary' : 'secondary'}
-          size="sm"
-        >
-          🏁 Milestones ({milestones.length})
-        </Button>
+      {/* View Toggle & Reset */}
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <Button
+            onClick={() => setShowTasksView(true)}
+            variant={showTasksView ? 'primary' : 'secondary'}
+            size="sm"
+          >
+            📋 Weekly Tasks ({weeklyTasks.length})
+          </Button>
+          <Button
+            onClick={() => setShowTasksView(false)}
+            variant={!showTasksView ? 'primary' : 'secondary'}
+            size="sm"
+          >
+            🏁 Milestones ({milestones.length})
+          </Button>
+        </div>
+        {showTasksView && (
+          <Button
+            onClick={() => {
+              if (window.confirm('Reset all tasks to In Progress?')) {
+                resetAllWeeklyTasks();
+              }
+            }}
+            variant="danger"
+            size="sm"
+          >
+            ↻ Reset All
+          </Button>
+        )}
       </div>
 
       {showTasksView ? (
