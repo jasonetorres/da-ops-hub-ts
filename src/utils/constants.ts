@@ -1,4 +1,4 @@
-// WebStorm DA Role Constants
+// Web/JS/TS DA Role Constants
 export const PILLARS = [
   'Productivity ROI',
   'AI + Guardrails',

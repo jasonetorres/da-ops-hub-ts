@@ -25,7 +25,7 @@ export default function Sidebar({ items, currentTab, onTabChange }: SidebarProps
     >
       <div style={{ padding: '12px 0 24px', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
         <div style={{ fontSize: '12px', fontWeight: '600', letterSpacing: '0.05em', color: 'rgba(255,255,255,0.6)' }}>
-          WebStorm DA Ops Hub
+          Web/JS/TS DA Ops Hub
         </div>
         <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.4)', marginTop: '4px' }}>
           Developer Advocacy Toolkit

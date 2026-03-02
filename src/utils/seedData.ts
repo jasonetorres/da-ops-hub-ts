@@ -318,7 +318,7 @@ export const SEED_STRATEGIC_PILLARS: StrategicPillar[] = [
     description: 'Developers detect BS instantly. Show up as a peer, not a spokesperson.',
     phase: '30-day',
     keyTenets: [
-      'Use WebStorm as primary IDE from Day 1 — genuinely, not performatively',
+      'Use WebStorm as primary Web/JS/TS IDE from Day 1 — genuinely, not performatively',
       'Share real findings in community: "here\'s what I discovered"',
       'Acknowledge rough edges honestly — developers respect candor',
       'Represent JetBrains like a great engineer: genuinely enthusiastic, honest about limitations',
@@ -352,7 +352,7 @@ export const SEED_STRATEGIC_PILLARS: StrategicPillar[] = [
     keyTenets: [
       'Product team needs to hear developer frustrations + reproduction steps + context, not just complaints',
       'Developers need to understand what\'s coming and why — roadmap context builds buy-in',
-      'Champion program creates 10 community voices with direct access to product feedback',
+      'JBCC (JetBrains Community Contributor) program gives Web/JS/TS community voices direct access to product feedback',
       'Weekly sync with product managers ensures I\'m not creating content about ancient features',
       'Structured feedback submission (not just Slack messages) makes impact measurable',
     ],
@@ -560,8 +560,8 @@ export const SEED_WEEKLY_TASKS: WeeklyTask[] = [
   },
   {
     id: 'task-1-2',
-    title: 'Internal relationship building (1-on-1s)',
-    description: 'Meet with DevRel, product, engineering, marketing. Understand roadmap, positioning, gaps.',
+    title: 'Meet JetBrains advocacy, WebStorm & cross-team (1-on-1s)',
+    description: 'Meet people in advocacy, WebStorm, product, engineering, and marketing. Understand how JetBrains ticks — who to go to for what, which systems do what. Build the internal network from the start. JetBrains runs on relationships.',
     phase: '30-day',
     week: 1,
     track: 'Product Bridge',
@@ -570,12 +570,12 @@ export const SEED_WEEKLY_TASKS: WeeklyTask[] = [
     linkedContent: [],
     linkedChampions: [],
     linkedSignals: [],
-    notes: 'Set up recurring syncs, especially with product team.',
+    notes: 'JetBrains very much functions on who you know. Set up recurring syncs. Map people and processes — not just titles.',
   },
   {
     id: 'task-1-3',
     title: 'Document knowledge: internal strategy review',
-    description: 'Read positioning docs, past campaigns, product roadmap, existing advocacy programs.',
+    description: 'Read positioning docs, past campaigns, product roadmap, existing advocacy programs. Learn internal systems — what goes where, which teams own what.',
     phase: '30-day',
     week: 1,
     track: 'Content',
@@ -584,7 +584,21 @@ export const SEED_WEEKLY_TASKS: WeeklyTask[] = [
     linkedContent: [],
     linkedChampions: [],
     linkedSignals: [],
-    notes: 'Build context before creating content.',
+    notes: 'Build context before creating content. Understanding JetBrains as a business is as important as understanding the product.',
+  },
+  {
+    id: 'task-1-4',
+    title: 'Settle in: understand JetBrains as a business',
+    description: 'Immerse in how JetBrains actually operates — culture, decision-making, internal communication norms, which system does what. Attend team meetings as an observer. Ask "how do things work here?" before assuming.',
+    phase: '30-day',
+    week: 1,
+    track: 'Product Bridge',
+    status: 'In Progress',
+    dueDate: '2026-02-07',
+    linkedContent: [],
+    linkedChampions: [],
+    linkedSignals: [],
+    notes: 'This is a solid foundation for everything else. Rushing content before understanding the business is backwards.',
   },
   {
     id: 'task-2-1',
@@ -730,8 +744,8 @@ export const SEED_WEEKLY_TASKS: WeeklyTask[] = [
   },
   {
     id: 'task-7-1',
-    title: 'Draft Champion Program proposal',
-    description: 'Internal proposal: criteria, benefits, responsibilities, expected reach, budget. Ready for leadership review.',
+    title: 'Deep-dive into JBCC program, prepare for Web/JS/TS DA role',
+    description: 'Learn the JBCC (JetBrains Community Contributor) program inside-out: structure, current contributors, benefits, responsibilities. Meet the existing JBCC team. Prepare to take on the Web/JS/TS DA role within the program.',
     phase: '60-day',
     week: 7,
     track: 'Community',
@@ -740,7 +754,7 @@ export const SEED_WEEKLY_TASKS: WeeklyTask[] = [
     linkedContent: [],
     linkedChampions: [],
     linkedSignals: [],
-    notes: 'Foundation for scaling beyond individual advocates.',
+    notes: 'JBCC already exists — role is to become the Web DA for it, not build from scratch. Learn before leading.',
   },
   {
     id: 'task-8-1',
@@ -788,8 +802,8 @@ export const SEED_WEEKLY_TASKS: WeeklyTask[] = [
   },
   {
     id: 'task-10-2',
-    title: 'Formally launch Champion Program',
-    description: '5+ initial champions onboarded. Benefits delivered. First champion content published.',
+    title: 'Formally active as Web/JS/TS DA in JBCC',
+    description: 'Fully operational as the Web DA within the JBCC (JetBrains Community Contributor) program. Web community contributors onboarded/engaged. First JBCC Web content published or facilitated.',
     phase: '90-day',
     week: 10,
     track: 'Community',
@@ -798,7 +812,7 @@ export const SEED_WEEKLY_TASKS: WeeklyTask[] = [
     linkedContent: [],
     linkedChampions: ['1', '2'],
     linkedSignals: [],
-    notes: 'Foundation that scales beyond one DA.',
+    notes: 'JBCC is the scalable foundation. Being the Web DA means owning and growing this segment of the program.',
   },
   {
     id: 'task-11-1',
@@ -920,12 +934,12 @@ export const SEED_OKRS: OKR[] = [
   },
   {
     id: 'okr-3',
-    title: 'Launch Champion Program',
-    description: 'Create scalable community advocate foundation',
+    title: 'Become Web/JS/TS DA in the JBCC Program',
+    description: 'Learn, join, and take ownership of the Web/JS/TS segment of the JetBrains Community Contributor (JBCC) program',
     keyResults: [
       {
         id: 'kr-3-1',
-        description: 'Identify + outreach to 20 influential developers (by Day 30)',
+        description: 'Identify + outreach to 20 influential Web/JS/TS developers (by Day 30)',
         target: 20,
         current: 0,
         unit: 'developers',
@@ -933,15 +947,15 @@ export const SEED_OKRS: OKR[] = [
       },
       {
         id: 'kr-3-2',
-        description: 'Onboard 5+ champions with benefits (by Day 90)',
+        description: 'Fully active as Web DA in JBCC with 5+ community contributors engaged (by Day 90)',
         target: 5,
         current: 0,
-        unit: 'champions',
+        unit: 'contributors',
         status: 'Not Started',
       },
       {
         id: 'kr-3-3',
-        description: 'First champion content published (by Day 90)',
+        description: 'First JBCC Web community content piece published or facilitated (by Day 90)',
         target: 1,
         current: 0,
         unit: 'pieces',
@@ -952,7 +966,7 @@ export const SEED_OKRS: OKR[] = [
     linkedPillars: ['sp-3'],
     status: 'Active',
     owner: 'Jason Torres',
-    successMetric: 'Advocates become extensions of DA efforts',
+    successMetric: 'JBCC Web/JS/TS community contributors become an extension of DA efforts',
   },
   {
     id: 'okr-4',
@@ -1068,40 +1082,43 @@ export const SEED_OKRS: OKR[] = [
 export const SEED_DOCUMENTS: StrategicDocument[] = [
   {
     id: 'doc-1',
-    title: '30·60·90 Day Game Plan - WebStorm Developer Advocate',
+    title: '30·60·90 Day Game Plan - Web/JS/TS Developer Advocate',
     type: 'Plan',
     content: `# 30·60·90 Day Game Plan
 
 ## The Premise
-WebStorm is the most productive JavaScript IDE ever built. My job, starting Day 1, is to make sure every JavaScript developer knows it — and to build the community, content, and programs that prove it.
+WebStorm is the most productive Web/JS/TS IDE ever built. My job, starting Day 1, is to make sure every JavaScript and TypeScript developer knows it — and to build the community, content, and programs that prove it. I think of myself as a Web/JS/TS DA first, remaining technology-first in everything I do.
 
 ## 30 Days: Listen, Learn & Land
-**Week 1-2:** Internal Onboarding & Immersion
-- Product deep-dive: Set WebStorm as primary IDE, work through every major feature
-- Internal relationship building: 1-on-1s with DevRel, product, engineering, marketing
+**Week 1-2:** Internal Onboarding, Settling In & People
+- Product deep-dive: Set WebStorm as primary Web/JS/TS IDE, work through every major feature
+- Settle in and understand JetBrains: meet people in advocacy, the WebStorm team, and across the business. JetBrains functions on who you know — build that network from Day 1.
+- Map JetBrains systems, processes, and culture: understand how things work (and sometimes don't), who owns what, and which system does what.
+- Internal 1-on-1s with DevRel, product, engineering, marketing: understand roadmap, positioning, gaps
 - Documentation & knowledge absorption: Read strategy docs, positioning, past campaigns
+- Learn the JBCC (JetBrains Community Contributor) program: understand its structure, existing contributors, and the Web DA role I'll be stepping into
 
 **Week 3-4:** External Listening & Mapping
-- Community audit: Reddit, Twitter, Stack Overflow, Discord, GitHub
+- Community audit: Reddit, Twitter, Stack Overflow, Discord, GitHub — Web/JS/TS sentiment
 - Competitive intelligence: Cursor, VS Code, Zed positioning and narratives
-- Identify 20 influential developers for champion recruitment
+- Identify 20 influential Web/JS/TS developers for JBCC outreach
 
 ## 60 Days: Build & Begin
 **Week 5-6:** Content & Community Launches
-- Publish first blog post: Technical deep-dive, peer-to-peer tone
+- Publish first blog post: Technical deep-dive, peer-to-peer tone, Web/JS/TS developer audience
 - Produce first YouTube tutorial: Higher production value, SEO optimized
-- Personal outreach to 5 champion candidates: Genuine conversations, not pitches
+- Personal outreach to 5 potential JBCC contributors: Genuine conversations, not pitches
 
-**Week 7-8:** Active Community Presence
+**Week 7-8:** Active Community Presence & JBCC Preparation
 - Daily presence in developer communities: Reddit, Twitter, Discord
 - Submit conference talk abstract
-- Draft Champion Program proposal
+- Deep-dive into JBCC: learn the program fully and prepare to take on the Web/JS/TS DA role
 
 ## 90 Days: Impact & Scale
-**Week 9-10:** Content Series & Speaking
-- Launch 3-part content series: "WebStorm Mastery" or "AI + WebStorm for Real Teams"
+**Week 9-10:** Content Series, Speaking & JBCC
+- Launch 3-part content series: Web/JS/TS developer focus
 - Deliver first conference/meetup talk
-- Formally launch Champion Program (5+ champions)
+- Formally active as Web/JS/TS DA in JBCC (JetBrains Community Contributor program)
 
 **Week 11-12:** Strategic Planning & Partnerships
 - Publish community spotlight (developer interview)
@@ -1110,9 +1127,9 @@ WebStorm is the most productive JavaScript IDE ever built. My job, starting Day 
 
 ## Success Metrics
 - Content: 2/month blog posts, 1/month videos by Day 90
-- Community: 30% ↑ mentions/shares, 5 champions launched
+- Community: 30% ↑ Web/JS/TS mentions/shares, active in JBCC as Web DA
 - Product Bridge: 10+ pain points documented, monthly reports
-- Overall: Measurable shift in community perception of WebStorm`,
+- Overall: Measurable shift in community perception of WebStorm for Web/JS/TS development`,
     phase: 'Overview',
     tags: ['strategy', 'framework', '30-60-90', 'plan'],
     createdDate: '2026-02-01',
@@ -1145,7 +1162,7 @@ Translate product to developers and developers to product.
 
 - Product team hears developer frustrations with context and reproduction steps
 - Developers understand what's coming and why
-- Champion program: 10 community voices with direct product feedback access
+- JBCC (JetBrains Community Contributor): Web/JS/TS community voices with direct product feedback access
 - Weekly syncs with product managers
 - Structured feedback submission (not Slack messages)`,
     phase: 'Overview',

@@ -85,7 +85,7 @@ export default function StrategicFrameworkView() {
             <strong>Data-Informed Advocacy:</strong> Every decision backed by evidence from real conversations. 47 Reddit comments + 12 YouTrack upvotes {">"} 1 intuition. Community signals inform content, product feedback, and strategy.
           </p>
           <p style={{ margin: 0 }}>
-            <strong>Bridge Builder (Both Directions):</strong> Translate product to developers. Translate developers to product. Make the feedback loop work at scale through the Champion Program and structured reporting.
+            <strong>Bridge Builder (Both Directions):</strong> Translate product to developers. Translate developers to product. Make the feedback loop work at scale through the JBCC (JetBrains Community Contributor) program and structured reporting.
           </p>
         </div>
       </Card>
