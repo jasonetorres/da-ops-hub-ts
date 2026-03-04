@@ -9,6 +9,7 @@ import OverviewView from './components/views/OverviewView';
 import ChampionsView from './components/views/ChampionsView';
 import ContentView from './components/views/ContentView';
 import SignalsView from './components/views/SignalsView';
+import CommunityQAView from './components/views/CommunityQAView';
 import TrackerView from './components/views/TrackerView';
 import IntelView from './components/views/IntelView';
 import NewsView from './components/views/NewsView';
@@ -54,6 +55,7 @@ function App() {
       case 'champions': return <ChampionsView />;
       case 'content': return <ContentView />;
       case 'signals': return <SignalsView />;
+      case 'qa': return <CommunityQAView />;
       case 'tracker': return <TrackerView />;
       case 'intel': return <IntelView />;
       case 'news': return <NewsView />;

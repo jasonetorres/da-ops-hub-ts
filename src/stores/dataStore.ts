@@ -13,6 +13,7 @@ import type {
   KeyResult,
   StrategicDocument,
   Resource,
+  CommunityQuestion,
   Phase,
 } from '../types/domain';
 import {
@@ -27,6 +28,7 @@ import {
   SEED_OKRS,
   SEED_DOCUMENTS,
   SEED_RESOURCES,
+  SEED_COMMUNITY_QUESTIONS,
 } from '../utils/seedData';
 
 export interface DataState {
@@ -95,6 +97,13 @@ export interface DataState {
   addResource: (resource: Resource) => void;
   updateResource: (id: string, updates: Partial<Resource>) => void;
   deleteResource: (id: string) => void;
+
+  // Community Q&A
+  communityQuestions: CommunityQuestion[];
+  addCommunityQuestion: (question: CommunityQuestion) => void;
+  updateCommunityQuestion: (id: string, updates: Partial<CommunityQuestion>) => void;
+  deleteCommunityQuestion: (id: string) => void;
+  updateQuestionEngagement: (id: string, upvotes?: number, reshares?: number, replies?: number) => void;
 }
 
 interface DataStore extends DataState {
@@ -163,6 +172,13 @@ interface DataStore extends DataState {
   addResource: (resource: Resource) => void;
   updateResource: (id: string, updates: Partial<Resource>) => void;
   deleteResource: (id: string) => void;
+
+  // Community Q&A
+  communityQuestions: CommunityQuestion[];
+  addCommunityQuestion: (question: CommunityQuestion) => void;
+  updateCommunityQuestion: (id: string, updates: Partial<CommunityQuestion>) => void;
+  deleteCommunityQuestion: (id: string) => void;
+  updateQuestionEngagement: (id: string, upvotes?: number, reshares?: number, replies?: number) => void;
 }
 
 export const useDataStore = create<DataStore>()(
@@ -369,6 +385,34 @@ export const useDataStore = create<DataStore>()(
       deleteResource: (id: string) =>
         set((state) => ({
           resources: state.resources.filter((r) => r.id !== id),
+        })),
+
+      // Community Q&A
+      communityQuestions: SEED_COMMUNITY_QUESTIONS,
+      addCommunityQuestion: (question: CommunityQuestion) =>
+        set((state) => ({ communityQuestions: [...state.communityQuestions, question] })),
+      updateCommunityQuestion: (id: string, updates: Partial<CommunityQuestion>) =>
+        set((state) => ({
+          communityQuestions: state.communityQuestions.map((q) =>
+            q.id === id ? { ...q, ...updates } : q
+          ),
+        })),
+      deleteCommunityQuestion: (id: string) =>
+        set((state) => ({
+          communityQuestions: state.communityQuestions.filter((q) => q.id !== id),
+        })),
+      updateQuestionEngagement: (id: string, upvotes?: number, reshares?: number, replies?: number) =>
+        set((state) => ({
+          communityQuestions: state.communityQuestions.map((q) =>
+            q.id === id
+              ? {
+                  ...q,
+                  upvotes: upvotes !== undefined ? upvotes : q.upvotes,
+                  reshares: reshares !== undefined ? reshares : q.reshares,
+                  replies: replies !== undefined ? replies : q.replies,
+                }
+              : q
+          ),
         })),
     }),
     {
