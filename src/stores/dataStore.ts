@@ -187,50 +187,50 @@ export const useDataStore = create<DataStore>()(
       // Champions
       champions: SEED_CHAMPIONS,
       addChampion: (champion) =>
-        set((state) => ({ champions: [...state.champions, champion] })),
+        set((state) => ({ champions: [...(state.champions || []), champion] })),
       updateChampion: (id, updates) =>
         set((state) => ({
-          champions: state.champions.map((c) =>
+          champions: (state.champions || []).map((c) =>
             c.id === id ? { ...c, ...updates } : c
           ),
         })),
       deleteChampion: (id) =>
         set((state) => ({
-          champions: state.champions.filter((c) => c.id !== id),
+          champions: (state.champions || []).filter((c) => c.id !== id),
         })),
 
       // Content
       content: SEED_CONTENT,
       addContent: (item) =>
-        set((state) => ({ content: [...state.content, item] })),
+        set((state) => ({ content: [...(state.content || []), item] })),
       updateContent: (id, updates) =>
         set((state) => ({
-          content: state.content.map((c) =>
+          content: (state.content || []).map((c) =>
             c.id === id ? { ...c, ...updates } : c
           ),
         })),
       deleteContent: (id) =>
         set((state) => ({
-          content: state.content.filter((c) => c.id !== id),
+          content: (state.content || []).filter((c) => c.id !== id),
         })),
 
       // Signals
       signals: SEED_SIGNALS,
       addSignal: (signal) =>
-        set((state) => ({ signals: [...state.signals, signal] })),
+        set((state) => ({ signals: [...(state.signals || []), signal] })),
       updateSignal: (id, updates) =>
         set((state) => ({
-          signals: state.signals.map((s) =>
+          signals: (state.signals || []).map((s) =>
             s.id === id ? { ...s, ...updates } : s
           ),
         })),
       deleteSignal: (id) =>
         set((state) => ({
-          signals: state.signals.filter((s) => s.id !== id),
+          signals: (state.signals || []).filter((s) => s.id !== id),
         })),
       markSignalReported: (id) =>
         set((state) => ({
-          signals: state.signals.map((s) =>
+          signals: (state.signals || []).map((s) =>
             s.id === id ? { ...s, reported: true } : s
           ),
         })),
@@ -239,7 +239,7 @@ export const useDataStore = create<DataStore>()(
       milestones: SEED_MILESTONES,
       updateMilestoneStatus: (id, status) =>
         set((state) => ({
-          milestones: state.milestones.map((m) =>
+          milestones: (state.milestones || []).map((m) =>
             m.id === id ? { ...m, status } : m
           ),
         })),
@@ -248,7 +248,7 @@ export const useDataStore = create<DataStore>()(
       intel: SEED_INTEL,
       updateIntel: (id, updates) =>
         set((state) => ({
-          intel: state.intel.map((i) =>
+          intel: (state.intel || []).map((i) =>
             i.id === id ? { ...i, ...updates } : i
           ),
         })),
@@ -256,25 +256,25 @@ export const useDataStore = create<DataStore>()(
       // Strategic Planning: Pillars
       strategicPillars: SEED_STRATEGIC_PILLARS,
       addStrategicPillar: (pillar) =>
-        set((state) => ({ strategicPillars: [...state.strategicPillars, pillar] })),
+        set((state) => ({ strategicPillars: [...(state.strategicPillars || []), pillar] })),
       updateStrategicPillar: (id, updates) =>
         set((state) => ({
-          strategicPillars: state.strategicPillars.map((p) =>
+          strategicPillars: (state.strategicPillars || []).map((p) =>
             p.id === id ? { ...p, ...updates } : p
           ),
         })),
       deleteStrategicPillar: (id) =>
         set((state) => ({
-          strategicPillars: state.strategicPillars.filter((p) => p.id !== id),
+          strategicPillars: (state.strategicPillars || []).filter((p) => p.id !== id),
         })),
 
       // Strategic Planning: Content Pillars
       contentPillars: SEED_CONTENT_PILLARS,
       addContentPillar: (pillar) =>
-        set((state) => ({ contentPillars: [...state.contentPillars, pillar] })),
+        set((state) => ({ contentPillars: [...(state.contentPillars || []), pillar] })),
       updateContentPillar: (id, updates) =>
         set((state) => ({
-          contentPillars: state.contentPillars.map((p) =>
+          contentPillars: (state.contentPillars || []).map((p) =>
             p.id === id ? { ...p, ...updates } : p
           ),
         })),
@@ -282,22 +282,22 @@ export const useDataStore = create<DataStore>()(
       // Strategic Planning: Weekly Tasks
       weeklyTasks: SEED_WEEKLY_TASKS,
       addWeeklyTask: (task) =>
-        set((state) => ({ weeklyTasks: [...state.weeklyTasks, task] })),
+        set((state) => ({ weeklyTasks: [...(state.weeklyTasks || []), task] })),
       updateWeeklyTask: (id, updates) =>
         set((state) => ({
-          weeklyTasks: state.weeklyTasks.map((t) =>
+          weeklyTasks: (state.weeklyTasks || []).map((t) =>
             t.id === id ? { ...t, ...updates } : t
           ),
         })),
       completeWeeklyTask: (id) =>
         set((state) => ({
-          weeklyTasks: state.weeklyTasks.map((t) =>
+          weeklyTasks: (state.weeklyTasks || []).map((t) =>
             t.id === id ? { ...t, status: t.status === 'Completed' ? 'In Progress' : 'Completed' } : t
           ),
         })),
       resetAllWeeklyTasks: () =>
         set((state) => ({
-          weeklyTasks: state.weeklyTasks.map((t) => ({ ...t, status: 'In Progress' })),
+          weeklyTasks: (state.weeklyTasks || []).map((t) => ({ ...t, status: 'In Progress' })),
         })),
       getTasksForPhaseAndWeek: (phase: Phase, week: number): WeeklyTask[] => {
         const state = useDataStore.getState();
@@ -307,16 +307,16 @@ export const useDataStore = create<DataStore>()(
       // Strategic Planning: OKRs
       okrs: SEED_OKRS,
       addOKR: (okr: OKR) =>
-        set((state) => ({ okrs: [...state.okrs, okr] })),
+        set((state) => ({ okrs: [...(state.okrs || []), okr] })),
       updateOKR: (id: string, updates: Partial<OKR>) =>
         set((state) => ({
-          okrs: state.okrs.map((o: OKR) =>
+          okrs: (state.okrs || []).map((o: OKR) =>
             o.id === id ? { ...o, ...updates } : o
           ),
         })),
       updateKeyResult: (okrId: string, krId: string, updates: Partial<KeyResult>) =>
         set((state) => ({
-          okrs: state.okrs.map((o: OKR) =>
+          okrs: (state.okrs || []).map((o: OKR) =>
             o.id === okrId
               ? {
                   ...o,
@@ -360,50 +360,50 @@ export const useDataStore = create<DataStore>()(
       // Strategic Planning: Documents
       documents: SEED_DOCUMENTS,
       addDocument: (doc: StrategicDocument) =>
-        set((state) => ({ documents: [...state.documents, doc] })),
+        set((state) => ({ documents: [...(state.documents || []), doc] })),
       updateDocument: (id: string, updates: Partial<StrategicDocument>) =>
         set((state) => ({
-          documents: state.documents.map((d) =>
+          documents: (state.documents || []).map((d) =>
             d.id === id ? { ...d, ...updates } : d
           ),
         })),
       deleteDocument: (id: string) =>
         set((state) => ({
-          documents: state.documents.filter((d) => d.id !== id),
+          documents: (state.documents || []).filter((d) => d.id !== id),
         })),
 
       // Tools & Resources
       resources: SEED_RESOURCES,
       addResource: (resource: Resource) =>
-        set((state) => ({ resources: [...state.resources, resource] })),
+        set((state) => ({ resources: [...(state.resources || []), resource] })),
       updateResource: (id: string, updates: Partial<Resource>) =>
         set((state) => ({
-          resources: state.resources.map((r) =>
+          resources: (state.resources || []).map((r) =>
             r.id === id ? { ...r, ...updates } : r
           ),
         })),
       deleteResource: (id: string) =>
         set((state) => ({
-          resources: state.resources.filter((r) => r.id !== id),
+          resources: (state.resources || []).filter((r) => r.id !== id),
         })),
 
       // Community Q&A
       communityQuestions: SEED_COMMUNITY_QUESTIONS,
       addCommunityQuestion: (question: CommunityQuestion) =>
-        set((state) => ({ communityQuestions: [...state.communityQuestions, question] })),
+        set((state) => ({ communityQuestions: [...(state.communityQuestions || []), question] })),
       updateCommunityQuestion: (id: string, updates: Partial<CommunityQuestion>) =>
         set((state) => ({
-          communityQuestions: state.communityQuestions.map((q) =>
+          communityQuestions: (state.communityQuestions || []).map((q) =>
             q.id === id ? { ...q, ...updates } : q
           ),
         })),
       deleteCommunityQuestion: (id: string) =>
         set((state) => ({
-          communityQuestions: state.communityQuestions.filter((q) => q.id !== id),
+          communityQuestions: (state.communityQuestions || []).filter((q) => q.id !== id),
         })),
       updateQuestionEngagement: (id: string, upvotes?: number, reshares?: number, replies?: number) =>
         set((state) => ({
-          communityQuestions: state.communityQuestions.map((q) =>
+          communityQuestions: (state.communityQuestions || []).map((q) =>
             q.id === id
               ? {
                   ...q,
