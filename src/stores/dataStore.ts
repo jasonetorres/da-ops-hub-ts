@@ -419,24 +419,78 @@ export const useDataStore = create<DataStore>()(
       name: 'da-ops-hub-data',
       version: 2,
       migrate: (persistedState: any, version: number) => {
-        if (version < 2) return {...persistedState, communityQuestions: SEED_COMMUNITY_QUESTIONS};
+        // Start fresh if data is corrupted
+        const requiredFields = ['weeklyTasks', 'okrs', 'champions', 'content', 'signals', 'milestones', 'intel', 'strategicPillars', 'contentPillars', 'documents', 'resources', 'communityQuestions'];
+        const hasCorruptedData = requiredFields.some(field =>
+          persistedState[field] !== undefined && !Array.isArray(persistedState[field])
+        );
+
+        if (hasCorruptedData) {
+          // Clear corrupted data and start fresh
+          return {
+            weeklyTasks: SEED_WEEKLY_TASKS,
+            okrs: SEED_OKRS,
+            champions: SEED_CHAMPIONS,
+            content: SEED_CONTENT,
+            signals: SEED_SIGNALS,
+            milestones: SEED_MILESTONES,
+            intel: SEED_INTEL,
+            strategicPillars: SEED_STRATEGIC_PILLARS,
+            contentPillars: SEED_CONTENT_PILLARS,
+            documents: SEED_DOCUMENTS,
+            resources: SEED_RESOURCES,
+            communityQuestions: SEED_COMMUNITY_QUESTIONS,
+          };
+        }
+
+        if (version < 2) {
+          return {
+            ...persistedState,
+            communityQuestions: persistedState.communityQuestions || SEED_COMMUNITY_QUESTIONS,
+            weeklyTasks: persistedState.weeklyTasks || SEED_WEEKLY_TASKS,
+            okrs: persistedState.okrs || SEED_OKRS,
+            champions: persistedState.champions || SEED_CHAMPIONS,
+            content: persistedState.content || SEED_CONTENT,
+            signals: persistedState.signals || SEED_SIGNALS,
+            milestones: persistedState.milestones || SEED_MILESTONES,
+            intel: persistedState.intel || SEED_INTEL,
+            strategicPillars: persistedState.strategicPillars || SEED_STRATEGIC_PILLARS,
+            contentPillars: persistedState.contentPillars || SEED_CONTENT_PILLARS,
+            documents: persistedState.documents || SEED_DOCUMENTS,
+            resources: persistedState.resources || SEED_RESOURCES,
+          };
+        }
+
         return persistedState;
       },
       onRehydrateStorage: () => (state) => {
-        // After hydration, ensure all fields are properly initialized
+        // Final safety check: ensure all fields are valid arrays
         if (state) {
-          state.communityQuestions = Array.isArray(state.communityQuestions) ? state.communityQuestions : SEED_COMMUNITY_QUESTIONS;
-          state.weeklyTasks = Array.isArray(state.weeklyTasks) ? state.weeklyTasks : SEED_WEEKLY_TASKS;
-          state.champions = Array.isArray(state.champions) ? state.champions : SEED_CHAMPIONS;
-          state.content = Array.isArray(state.content) ? state.content : SEED_CONTENT;
-          state.signals = Array.isArray(state.signals) ? state.signals : SEED_SIGNALS;
-          state.milestones = Array.isArray(state.milestones) ? state.milestones : SEED_MILESTONES;
-          state.intel = Array.isArray(state.intel) ? state.intel : SEED_INTEL;
-          state.strategicPillars = Array.isArray(state.strategicPillars) ? state.strategicPillars : SEED_STRATEGIC_PILLARS;
-          state.contentPillars = Array.isArray(state.contentPillars) ? state.contentPillars : SEED_CONTENT_PILLARS;
-          state.okrs = Array.isArray(state.okrs) ? state.okrs : SEED_OKRS;
-          state.documents = Array.isArray(state.documents) ? state.documents : SEED_DOCUMENTS;
-          state.resources = Array.isArray(state.resources) ? state.resources : SEED_RESOURCES;
+          const fields = [
+            'communityQuestions', 'weeklyTasks', 'champions', 'content', 'signals',
+            'milestones', 'intel', 'strategicPillars', 'contentPillars', 'okrs', 'documents', 'resources'
+          ];
+          const seedData: any = {
+            communityQuestions: SEED_COMMUNITY_QUESTIONS,
+            weeklyTasks: SEED_WEEKLY_TASKS,
+            champions: SEED_CHAMPIONS,
+            content: SEED_CONTENT,
+            signals: SEED_SIGNALS,
+            milestones: SEED_MILESTONES,
+            intel: SEED_INTEL,
+            strategicPillars: SEED_STRATEGIC_PILLARS,
+            contentPillars: SEED_CONTENT_PILLARS,
+            okrs: SEED_OKRS,
+            documents: SEED_DOCUMENTS,
+            resources: SEED_RESOURCES,
+          };
+
+          fields.forEach((field) => {
+            if (!Array.isArray(state[field as keyof typeof state])) {
+              (state as any)[field] = seedData[field];
+            }
+          });
+
           import('../services/firebaseSync')
             .then(({ syncDataToFirebase }) => {
               syncDataToFirebase(state);
