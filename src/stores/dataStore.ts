@@ -301,7 +301,7 @@ export const useDataStore = create<DataStore>()(
         })),
       getTasksForPhaseAndWeek: (phase: Phase, week: number): WeeklyTask[] => {
         const state = useDataStore.getState();
-        return state.weeklyTasks.filter((t: WeeklyTask) => t.phase === phase && t.week === week);
+        return (state.weeklyTasks || []).filter((t: WeeklyTask) => t.phase === phase && t.week === week);
       },
 
       // Strategic Planning: OKRs
@@ -329,8 +329,8 @@ export const useDataStore = create<DataStore>()(
         })),
       getOKRProgress: (okrId: string): number => {
         const state = useDataStore.getState();
-        const okr = state.okrs.find((o: OKR) => o.id === okrId);
-        if (!okr || okr.keyResults.length === 0) return 0;
+        const okr = state.okrs?.find((o: OKR) => o.id === okrId);
+        if (!okr || !okr.keyResults || okr.keyResults.length === 0) return 0;
         const completedKRs = okr.keyResults.filter(
           (kr: KeyResult) => kr.current >= kr.target || kr.status === 'Completed'
         ).length;
@@ -338,8 +338,8 @@ export const useDataStore = create<DataStore>()(
       },
       getPhaseProgress: (phase: Phase): number => {
         const state = useDataStore.getState();
-        const phaseTasks = state.weeklyTasks.filter((t: WeeklyTask) => t.phase === phase);
-        const phaseOKRs = state.okrs.filter((o: OKR) => o.phase === phase);
+        const phaseTasks = (state.weeklyTasks || []).filter((t: WeeklyTask) => t.phase === phase);
+        const phaseOKRs = (state.okrs || []).filter((o: OKR) => o.phase === phase);
 
         if (phaseTasks.length === 0 && phaseOKRs.length === 0) return 0;
 
@@ -423,20 +423,20 @@ export const useDataStore = create<DataStore>()(
         return persistedState;
       },
       onRehydrateStorage: () => (state) => {
-        // After hydration, initialize Firebase sync
+        // After hydration, ensure all fields are properly initialized
         if (state) {
-          if (!state.communityQuestions) state.communityQuestions = SEED_COMMUNITY_QUESTIONS;
-          if (!state.weeklyTasks) state.weeklyTasks = SEED_WEEKLY_TASKS;
-          if (!state.champions) state.champions = SEED_CHAMPIONS;
-          if (!state.content) state.content = SEED_CONTENT;
-          if (!state.signals) state.signals = SEED_SIGNALS;
-          if (!state.milestones) state.milestones = SEED_MILESTONES;
-          if (!state.intel) state.intel = SEED_INTEL;
-          if (!state.strategicPillars) state.strategicPillars = SEED_STRATEGIC_PILLARS;
-          if (!state.contentPillars) state.contentPillars = SEED_CONTENT_PILLARS;
-          if (!state.okrs) state.okrs = SEED_OKRS;
-          if (!state.documents) state.documents = SEED_DOCUMENTS;
-          if (!state.resources) state.resources = SEED_RESOURCES;
+          state.communityQuestions = Array.isArray(state.communityQuestions) ? state.communityQuestions : SEED_COMMUNITY_QUESTIONS;
+          state.weeklyTasks = Array.isArray(state.weeklyTasks) ? state.weeklyTasks : SEED_WEEKLY_TASKS;
+          state.champions = Array.isArray(state.champions) ? state.champions : SEED_CHAMPIONS;
+          state.content = Array.isArray(state.content) ? state.content : SEED_CONTENT;
+          state.signals = Array.isArray(state.signals) ? state.signals : SEED_SIGNALS;
+          state.milestones = Array.isArray(state.milestones) ? state.milestones : SEED_MILESTONES;
+          state.intel = Array.isArray(state.intel) ? state.intel : SEED_INTEL;
+          state.strategicPillars = Array.isArray(state.strategicPillars) ? state.strategicPillars : SEED_STRATEGIC_PILLARS;
+          state.contentPillars = Array.isArray(state.contentPillars) ? state.contentPillars : SEED_CONTENT_PILLARS;
+          state.okrs = Array.isArray(state.okrs) ? state.okrs : SEED_OKRS;
+          state.documents = Array.isArray(state.documents) ? state.documents : SEED_DOCUMENTS;
+          state.resources = Array.isArray(state.resources) ? state.resources : SEED_RESOURCES;
           import('../services/firebaseSync')
             .then(({ syncDataToFirebase }) => {
               syncDataToFirebase(state);
