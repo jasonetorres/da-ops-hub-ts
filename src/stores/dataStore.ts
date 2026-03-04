@@ -417,7 +417,7 @@ export const useDataStore = create<DataStore>()(
     }),
     {
       name: 'da-ops-hub-data',
-      version: 2,
+      version: 3,
       migrate: (persistedState: any, version: number) => {
         // Start fresh if data is corrupted
         const requiredFields = ['weeklyTasks', 'okrs', 'champions', 'content', 'signals', 'milestones', 'intel', 'strategicPillars', 'contentPillars', 'documents', 'resources', 'communityQuestions'];
