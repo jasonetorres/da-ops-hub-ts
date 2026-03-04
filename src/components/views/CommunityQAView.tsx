@@ -8,7 +8,7 @@ import StatusPill from '../common/StatusPill';
 import SectionHeader from '../common/SectionHeader';
 
 export default function CommunityQAView() {
-  const { communityQuestions, addCommunityQuestion, deleteCommunityQuestion } = useDataStore();
+  const { communityQuestions = [], addCommunityQuestion, deleteCommunityQuestion } = useDataStore();
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<QACategory | 'all'>('all');
   const [selectedStatus, setSelectedStatus] = useState<'all' | 'Unanswered' | 'Answered' | 'Content Published' | 'FAQ Published'>('all');
@@ -26,7 +26,7 @@ export default function CommunityQAView() {
   const sources: QASource[] = ['Slack', 'Reddit', 'Discord', 'Twitter/X', 'GitHub Discussions', 'Email', 'Conference', 'Meetup'];
   const statuses = ['Unanswered', 'Answered', 'Content Published', 'FAQ Published'] as const;
 
-  const filteredQuestions = communityQuestions.filter((q) => {
+  const filteredQuestions = (communityQuestions || []).filter((q) => {
     const categoryMatch = selectedCategory === 'all' || q.category === selectedCategory;
     const statusMatch = selectedStatus === 'all' || q.status === selectedStatus;
     return categoryMatch && statusMatch;

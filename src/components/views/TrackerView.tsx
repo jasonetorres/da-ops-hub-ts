@@ -6,7 +6,7 @@ import StatusPill from '../common/StatusPill';
 import SectionHeader from '../common/SectionHeader';
 
 export default function TrackerView() {
-  const { milestones, updateMilestoneStatus, weeklyTasks, completeWeeklyTask, resetAllWeeklyTasks } = useDataStore();
+  const { milestones = [], updateMilestoneStatus, weeklyTasks = [], completeWeeklyTask, resetAllWeeklyTasks } = useDataStore();
   const [showTasksView, setShowTasksView] = useState(true);
   const [expandedTaskId, setExpandedTaskId] = useState<string | null>(null);
   const [taskNotes, setTaskNotes] = useState<Record<string, string>>({});

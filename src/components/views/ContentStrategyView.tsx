@@ -5,7 +5,7 @@ import PillarCard from '../common/PillarCard';
 import Card from '../common/Card';
 
 export default function ContentStrategyView() {
-  const { contentPillars } = useDataStore();
+  const { contentPillars = [] } = useDataStore();
   const [expandedPillar, setExpandedPillar] = useState<string | null>(null);
 
   return (

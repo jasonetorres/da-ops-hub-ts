@@ -5,7 +5,7 @@ import Card from '../common/Card';
 import StatusPill from '../common/StatusPill';
 
 export default function OKRsDashboardView() {
-  const { okrs, updateKeyResult, getOKRProgress } = useDataStore();
+  const { okrs = [], updateKeyResult, getOKRProgress } = useDataStore();
   const [editingKR, setEditingKR] = useState<{ okrId: string; krId: string } | null>(null);
   const [newValue, setNewValue] = useState<number>(0);
 

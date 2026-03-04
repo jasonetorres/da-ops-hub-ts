@@ -9,7 +9,7 @@ import StatusPill from '../common/StatusPill';
 import SectionHeader from '../common/SectionHeader';
 
 export default function ContentView() {
-  const { content, addContent, updateContent, deleteContent } = useDataStore();
+  const { content = [], addContent, updateContent, deleteContent } = useDataStore();
   const { contentFilter, setContentFilter } = useAppStore();
   const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);

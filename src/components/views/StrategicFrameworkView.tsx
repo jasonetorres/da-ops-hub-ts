@@ -5,7 +5,7 @@ import PillarCard from '../common/PillarCard';
 import Card from '../common/Card';
 
 export default function StrategicFrameworkView() {
-  const { strategicPillars, okrs } = useDataStore();
+  const { strategicPillars = [], okrs = [] } = useDataStore();
   const [expandedPillar, setExpandedPillar] = useState<string | null>(null);
 
   const pillars = strategicPillars.sort((a: any, b: any) => b.weight - a.weight);

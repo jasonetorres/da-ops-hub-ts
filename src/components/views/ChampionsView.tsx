@@ -9,7 +9,7 @@ import StatusPill from '../common/StatusPill';
 import SectionHeader from '../common/SectionHeader';
 
 export default function ChampionsView() {
-  const { champions, addChampion, updateChampion, deleteChampion } = useDataStore();
+  const { champions = [], addChampion, updateChampion, deleteChampion } = useDataStore();
   const { championsFilter, setChampionsFilter } = useAppStore();
   const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);

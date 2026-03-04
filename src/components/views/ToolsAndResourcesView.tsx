@@ -4,7 +4,7 @@ import SectionHeader from '../common/SectionHeader';
 import Card from '../common/Card';
 
 export default function ToolsAndResourcesView() {
-  const { resources, addResource, deleteResource } = useDataStore();
+  const { resources = [], addResource, deleteResource } = useDataStore();
   const [showForm, setShowForm] = useState(false);
   const [newTitle, setNewTitle] = useState('');
   const [newUrl, setNewUrl] = useState('');

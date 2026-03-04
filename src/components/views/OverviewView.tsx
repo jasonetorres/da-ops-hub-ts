@@ -6,7 +6,7 @@ import Card from '../common/Card';
 import SectionHeader from '../common/SectionHeader';
 
 export default function OverviewView() {
-  const { champions, content, signals, milestones, intel } = useDataStore();
+  const { champions = [], content = [], signals = [], milestones = [], intel = [] } = useDataStore();
   const { setCurrentTab } = useAppStore();
   const { completedChallenges, streak } = useChallengeStore();
 

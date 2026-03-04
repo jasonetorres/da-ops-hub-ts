@@ -4,7 +4,7 @@ import SectionHeader from '../common/SectionHeader';
 import Card from '../common/Card';
 
 export default function DocumentsView() {
-  const { documents } = useDataStore();
+  const { documents = [] } = useDataStore();
   const [expandedDoc, setExpandedDoc] = useState<string | null>(null);
 
   const typeEmoji: Record<string, string> = {

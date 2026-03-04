@@ -9,7 +9,7 @@ import StatusPill from '../common/StatusPill';
 import SectionHeader from '../common/SectionHeader';
 
 export default function SignalsView() {
-  const { signals, addSignal, markSignalReported } = useDataStore();
+  const { signals = [], addSignal, markSignalReported } = useDataStore();
   const { signalsFilter, setSignalsFilter } = useAppStore();
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState<Partial<Signal>>({

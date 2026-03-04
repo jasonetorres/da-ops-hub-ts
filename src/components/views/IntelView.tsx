@@ -7,7 +7,7 @@ import Button from '../common/Button';
 import SectionHeader from '../common/SectionHeader';
 
 export default function IntelView() {
-  const { intel, updateIntel } = useDataStore();
+  const { intel = [], updateIntel } = useDataStore();
   const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState({
