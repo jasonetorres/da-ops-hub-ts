@@ -443,25 +443,22 @@ export const useDataStore = create<DataStore>()(
           };
         }
 
-        if (version < 2) {
-          return {
-            ...persistedState,
-            communityQuestions: persistedState.communityQuestions || SEED_COMMUNITY_QUESTIONS,
-            weeklyTasks: persistedState.weeklyTasks || SEED_WEEKLY_TASKS,
-            okrs: persistedState.okrs || SEED_OKRS,
-            champions: persistedState.champions || SEED_CHAMPIONS,
-            content: persistedState.content || SEED_CONTENT,
-            signals: persistedState.signals || SEED_SIGNALS,
-            milestones: persistedState.milestones || SEED_MILESTONES,
-            intel: persistedState.intel || SEED_INTEL,
-            strategicPillars: persistedState.strategicPillars || SEED_STRATEGIC_PILLARS,
-            contentPillars: persistedState.contentPillars || SEED_CONTENT_PILLARS,
-            documents: persistedState.documents || SEED_DOCUMENTS,
-            resources: persistedState.resources || SEED_RESOURCES,
-          };
-        }
-
-        return persistedState;
+        // For any version below current, fill in missing fields with seed data
+        return {
+          ...persistedState,
+          communityQuestions: Array.isArray(persistedState?.communityQuestions) ? persistedState.communityQuestions : SEED_COMMUNITY_QUESTIONS,
+          weeklyTasks: Array.isArray(persistedState?.weeklyTasks) ? persistedState.weeklyTasks : SEED_WEEKLY_TASKS,
+          okrs: Array.isArray(persistedState?.okrs) ? persistedState.okrs : SEED_OKRS,
+          champions: Array.isArray(persistedState?.champions) ? persistedState.champions : SEED_CHAMPIONS,
+          content: Array.isArray(persistedState?.content) ? persistedState.content : SEED_CONTENT,
+          signals: Array.isArray(persistedState?.signals) ? persistedState.signals : SEED_SIGNALS,
+          milestones: Array.isArray(persistedState?.milestones) ? persistedState.milestones : SEED_MILESTONES,
+          intel: Array.isArray(persistedState?.intel) ? persistedState.intel : SEED_INTEL,
+          strategicPillars: Array.isArray(persistedState?.strategicPillars) ? persistedState.strategicPillars : SEED_STRATEGIC_PILLARS,
+          contentPillars: Array.isArray(persistedState?.contentPillars) ? persistedState.contentPillars : SEED_CONTENT_PILLARS,
+          documents: Array.isArray(persistedState?.documents) ? persistedState.documents : SEED_DOCUMENTS,
+          resources: Array.isArray(persistedState?.resources) ? persistedState.resources : SEED_RESOURCES,
+        };
       },
       onRehydrateStorage: () => (state) => {
         // Final safety check: ensure all fields are valid arrays
