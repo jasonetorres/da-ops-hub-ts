@@ -18,14 +18,14 @@ const TRACK_ICONS: Record<string, string> = {
 };
 
 export default function WeeklyTasksView() {
-  const { weeklyTasks, completeWeeklyTask } = useDataStore();
+  const { weeklyTasks = [], completeWeeklyTask } = useDataStore();
   const [selectedWeeks, setSelectedWeeks] = useState<number[]>([1]);
   const [filterTrack, setFilterTrack] = useState<'Content' | 'Community' | 'Product Bridge' | 'all'>('all');
   const [filterStatus, setFilterStatus] = useState<'Not Started' | 'In Progress' | 'Completed' | 'all'>('all');
 
-  const allWeeks = Array.from(new Set(weeklyTasks.map((t: WeeklyTask) => t.week))).sort((a: number, b: number) => a - b);
+  const allWeeks = Array.from(new Set((weeklyTasks || []).map((t: WeeklyTask) => t.week))).sort((a: number, b: number) => a - b);
 
-  const filtered = weeklyTasks
+  const filtered = (weeklyTasks || [])
     .filter((t: WeeklyTask) => selectedWeeks.includes(t.week))
     .filter((t: WeeklyTask) => filterTrack === 'all' || t.track === filterTrack)
     .filter((t: WeeklyTask) => filterStatus === 'all' || t.status === filterStatus);
@@ -215,25 +215,25 @@ export default function WeeklyTasksView() {
           <div style={{ marginTop: '8px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '12px' }}>
             <div>
               <div style={{ color: 'rgba(232,237,243,0.5)', fontSize: '11px' }}>Total Tasks</div>
-              <div style={{ fontSize: '16px', fontWeight: '600', color: '#087CFA' }}>{weeklyTasks.length}</div>
+              <div style={{ fontSize: '16px', fontWeight: '600', color: '#087CFA' }}>{(weeklyTasks || []).length}</div>
             </div>
             <div>
               <div style={{ color: 'rgba(232,237,243,0.5)', fontSize: '11px' }}>Completed</div>
               <div style={{ fontSize: '16px', fontWeight: '600', color: '#21D789' }}>
-                {weeklyTasks.filter((t: any) => t.status === 'Completed').length}
+                {(weeklyTasks || []).filter((t: any) => t.status === 'Completed').length}
               </div>
             </div>
             <div>
               <div style={{ color: 'rgba(232,237,243,0.5)', fontSize: '11px' }}>In Progress</div>
               <div style={{ fontSize: '16px', fontWeight: '600', color: '#FC801D' }}>
-                {weeklyTasks.filter((t: any) => t.status === 'In Progress').length}
+                {(weeklyTasks || []).filter((t: any) => t.status === 'In Progress').length}
               </div>
             </div>
             <div>
               <div style={{ color: 'rgba(232,237,243,0.5)', fontSize: '11px' }}>Completion %</div>
               <div style={{ fontSize: '16px', fontWeight: '600', color: '#087CFA' }}>
                 {Math.round(
-                  (weeklyTasks.filter((t: any) => t.status === 'Completed').length / weeklyTasks.length) * 100
+                  ((weeklyTasks || []).filter((t: any) => t.status === 'Completed').length / (weeklyTasks || []).length) * 100
                 )}%
               </div>
             </div>
