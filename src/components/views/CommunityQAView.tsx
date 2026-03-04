@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import type { CommunityQuestion, QACategory, QASource } from '../../types/domain';
 import { useDataStore } from '../../stores/dataStore';
-import { useAppStore } from '../../stores/appStore';
 import Card from '../common/Card';
 import Modal from '../common/Modal';
 import Button from '../common/Button';
@@ -9,7 +8,7 @@ import StatusPill from '../common/StatusPill';
 import SectionHeader from '../common/SectionHeader';
 
 export default function CommunityQAView() {
-  const { communityQuestions, addCommunityQuestion, updateCommunityQuestion, deleteCommunityQuestion } = useDataStore();
+  const { communityQuestions, addCommunityQuestion, deleteCommunityQuestion } = useDataStore();
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<QACategory | 'all'>('all');
   const [selectedStatus, setSelectedStatus] = useState<'all' | 'Unanswered' | 'Answered' | 'Content Published' | 'FAQ Published'>('all');
@@ -56,13 +55,6 @@ export default function CommunityQAView() {
       setShowModal(false);
       setFormData({ source: 'Slack', question: '', sourceHandle: '', category: 'Other', responseFramework: '', tags: [], status: 'Unanswered' });
     }
-  };
-
-  const statusColor: Record<string, string> = {
-    'Unanswered': '#FF6B6B',
-    'Answered': '#4ECDC4',
-    'Content Published': '#45B7D1',
-    'FAQ Published': '#96CEB4',
   };
 
   return (
