@@ -206,3 +206,26 @@ export interface Resource {
   url: string;
   dateAdded: string;
 }
+
+// Community Q&A
+export type QACategory = 'Cursor Positioning' | 'WebStorm Features' | 'AI/Inference' | 'Competitive' | 'Performance' | 'TypeScript' | 'Monorepo' | 'Pricing' | 'Other';
+export type QASource = 'Slack' | 'Reddit' | 'Discord' | 'Twitter/X' | 'GitHub Discussions' | 'Email' | 'Conference' | 'Meetup';
+export type QAStatus = 'Unanswered' | 'Answered' | 'Content Published' | 'FAQ Published';
+
+export interface CommunityQuestion {
+  id: string;
+  question: string;
+  source: QASource;
+  sourceHandle: string;
+  category: QACategory;
+  responseFramework: string; // Markdown response template
+  tags: string[];
+  dateAsked: string; // ISO date
+  linkedSignalId?: string;
+  linkedContentId?: string;
+  upvotes: number;
+  reshares: number;
+  replies: number;
+  status: QAStatus;
+  notes: string;
+}

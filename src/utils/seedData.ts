@@ -12,6 +12,7 @@ import type {
   OKR,
   StrategicDocument,
   Resource,
+  CommunityQuestion,
 } from '../types/domain';
 
 // Seed Champions
@@ -1211,5 +1212,81 @@ export const SEED_RESOURCES: Resource[] = [
     title: 'JetBrains Remoting Research Questionnaire',
     url: 'https://docs.google.com/forms/d/e/1FAIpQLScyxmR-NyQ_5UxhFgkJRCjenTCdiJ9tg_rqlc-IXSwYoHQOmg/viewform?usp=publish-editor',
     dateAdded: '2026-02-26',
+  },
+];
+
+// Community Q&A: Questions + Response Frameworks
+export const SEED_COMMUNITY_QUESTIONS: CommunityQuestion[] = [
+  {
+    id: 'qa-1',
+    question: 'How is JetBrains dealing with the rise of Cursor?',
+    source: 'Slack',
+    sourceHandle: 'Chris Nowicki',
+    category: 'Cursor Positioning',
+    responseFramework: `**Acknowledge the real thing:**
+Cursor has nailed one specific problem: token streaming latency. They've optimized inference to feel instant.
+
+**Show you understand:**
+They do it with Claude API optimized for streaming, KV caching, and latency tuning.
+
+**Flip to WebStorm's angle:**
+But here's what they're missing: IDE intelligence. Type-aware refactoring, deep project understanding, debugging, database tools. Cursor is a really good editor with great AI. WebStorm is an IDE that happens to have AI.
+
+**Make it about choice:**
+For TypeScript monorepos? WebStorm's cross-package navigation + refactoring beats Cursor. For prototyping fast? Cursor wins.`,
+    tags: ['cursor', 'latency', 'ai', 'inference', 'ide-vs-editor'],
+    dateAsked: '2026-03-04',
+    upvotes: 5,
+    reshares: 2,
+    replies: 0,
+    status: 'Answered',
+    notes: 'Good foundation for competitive positioning content.',
+  },
+  {
+    id: 'qa-2',
+    question: 'Why is WebStorm slower than VS Code on startup?',
+    source: 'Reddit',
+    sourceHandle: 'r/webdev',
+    category: 'Performance',
+    responseFramework: `**Acknowledge the real constraint:**
+VS Code starts faster because it's lighter weight — minimal features by default. WebStorm includes everything built-in: debugger, profiler, database tools, refactoring.
+
+**Frame the tradeoff:**
+Startup time vs runtime capability. You pay 5 seconds at startup to save 50 clicks during development.
+
+**The inference angle:**
+If using AI assistant, first cold start includes model loading. This is inference engineering—even Cursor has it with local models.`,
+    tags: ['performance', 'startup', 'tradeoff'],
+    dateAsked: '2026-03-04',
+    upvotes: 3,
+    reshares: 1,
+    replies: 2,
+    status: 'Answered',
+    notes: 'Frames as fundamental architecture choice, not a bug.',
+  },
+  {
+    id: 'qa-3',
+    question: 'Can I run local LLMs with WebStorm for privacy?',
+    source: 'Discord',
+    sourceHandle: 'Reactiflux',
+    category: 'AI/Inference',
+    responseFramework: `**Acknowledge the privacy concern:**
+Yes. Running local models gives you full control—nothing leaves your machine.
+
+**Explain the tradeoff:**
+Local models are slower (inference latency), need more compute (quantization helps), but zero data leakage.
+
+**Show understanding of the tech:**
+Quantization reduces model size and latency. Running 7B parameter models locally is totally feasible on modern hardware. KV caching helps with multi-turn conversations.
+
+**Position WebStorm:**
+WebStorm's IDE intelligence (type checking, refactoring) runs locally by default. You can layer a local LLM on top for the best of both worlds.`,
+    tags: ['privacy', 'local-llm', 'quantization', 'inference'],
+    dateAsked: '2026-03-04',
+    upvotes: 8,
+    reshares: 3,
+    replies: 1,
+    status: 'Answered',
+    notes: 'Enterprise privacy angle. Strong content opportunity here.',
   },
 ];
