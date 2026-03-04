@@ -417,6 +417,11 @@ export const useDataStore = create<DataStore>()(
     }),
     {
       name: 'da-ops-hub-data',
+      version: 2,
+      migrate: (persistedState: any, version: number) => {
+        if (version < 2) return {...persistedState, communityQuestions: SEED_COMMUNITY_QUESTIONS};
+        return persistedState;
+      },
       onRehydrateStorage: () => (state) => {
         // After hydration, initialize Firebase sync
         if (state) {
