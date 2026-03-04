@@ -181,15 +181,15 @@ export default function WeeklyTasksView() {
                             </p>
 
                             {/* Linked items */}
-                            {(task.linkedContent.length > 0 || task.linkedChampions.length > 0) && (
+                            {((task.linkedContent || []).length > 0 || (task.linkedChampions || []).length > 0) && (
                               <div style={{ marginLeft: '32px', fontSize: '11px', color: 'rgba(132, 204, 250, 0.7)' }}>
-                                {task.linkedContent.length > 0 && (
+                                {(task.linkedContent || []).length > 0 && (
                                   <span style={{ marginRight: '12px' }}>
-                                    📝 {task.linkedContent.length} content
+                                    📝 {(task.linkedContent || []).length} content
                                   </span>
                                 )}
-                                {task.linkedChampions.length > 0 && (
-                                  <span>👥 {task.linkedChampions.length} champion{task.linkedChampions.length !== 1 ? 's' : ''}</span>
+                                {(task.linkedChampions || []).length > 0 && (
+                                  <span>👥 {(task.linkedChampions || []).length} champion{(task.linkedChampions || []).length !== 1 ? 's' : ''}</span>
                                 )}
                               </div>
                             )}
