@@ -425,6 +425,18 @@ export const useDataStore = create<DataStore>()(
       onRehydrateStorage: () => (state) => {
         // After hydration, initialize Firebase sync
         if (state) {
+          if (!state.communityQuestions) state.communityQuestions = SEED_COMMUNITY_QUESTIONS;
+          if (!state.weeklyTasks) state.weeklyTasks = SEED_WEEKLY_TASKS;
+          if (!state.champions) state.champions = SEED_CHAMPIONS;
+          if (!state.content) state.content = SEED_CONTENT;
+          if (!state.signals) state.signals = SEED_SIGNALS;
+          if (!state.milestones) state.milestones = SEED_MILESTONES;
+          if (!state.intel) state.intel = SEED_INTEL;
+          if (!state.strategicPillars) state.strategicPillars = SEED_STRATEGIC_PILLARS;
+          if (!state.contentPillars) state.contentPillars = SEED_CONTENT_PILLARS;
+          if (!state.okrs) state.okrs = SEED_OKRS;
+          if (!state.documents) state.documents = SEED_DOCUMENTS;
+          if (!state.resources) state.resources = SEED_RESOURCES;
           import('../services/firebaseSync')
             .then(({ syncDataToFirebase }) => {
               syncDataToFirebase(state);
