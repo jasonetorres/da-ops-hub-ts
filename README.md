@@ -55,6 +55,48 @@ npm run build      # Build for production
 npm run preview    # Preview the production build locally
 ```
 
+## Testing & Quality Assurance
+
+### Run Tests
+
+```bash
+npm run test              # Run all tests once
+npm run test:watch       # Watch mode for development
+npm run test:coverage    # Generate coverage report
+```
+
+**Test Suite**: 20+ tests covering critical functionality
+- **Vitest** – Fast unit testing framework
+- **React Testing Library** – Component testing utilities
+- **Coverage Target**: 70%+ for critical paths
+
+### Fixed Issues
+
+The codebase includes fixes for critical bugs:
+
+1. **Safe String Parsing** (ChallengeView.tsx)
+   - Replaced unsafe array indexing with regex-based validation
+   - Prevents crashes from malformed solution formats
+
+2. **Stable React Keys** (DocumentsView.tsx)
+   - Changed from array index keys to stable, content-based keys
+   - Prevents UI state loss when documents are reordered
+
+3. **Division by Zero Prevention** (OverviewView.tsx)
+   - Added explicit checks before progress calculations
+   - Returns 0 instead of NaN for empty data sets
+
+4. **Firebase Sync Debouncing** (dataStore.ts)
+   - Implements 500ms debounce for Firebase writes
+   - Prevents race conditions from rapid updates
+
+### CI/CD Pipeline
+
+GitHub Actions workflow (`.github/workflows/test.yml`) runs on every push and PR:
+- Runs tests on Node 18.x and 20.x
+- Reports coverage metrics
+- Blocks merge if tests fail
+
 ## Project Structure
 
 ```
