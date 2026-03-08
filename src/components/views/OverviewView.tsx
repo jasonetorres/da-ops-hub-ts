@@ -44,8 +44,9 @@ export default function OverviewView() {
   const phases = ['30-day', '60-day', '90-day'];
   const getPhaseProgress = (phase: string) => {
     const phaseItems = milestones.filter((m: Milestone) => m.phase === phase);
+    if (phaseItems.length === 0) return 0;
     const completed = phaseItems.filter((m: Milestone) => m.status === 'Completed').length;
-    return completed > 0 ? Math.round((completed / phaseItems.length) * 100) : 0;
+    return Math.round((completed / phaseItems.length) * 100);
   };
 
   const phaseIcon: Record<string, string> = {

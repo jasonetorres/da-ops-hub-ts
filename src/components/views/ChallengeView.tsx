@@ -19,14 +19,20 @@ export default function ChallengeView() {
 
   useEffect(() => {
     setCode(currentChallengeCode || challenge.starter);
-  }, [currentIndex]);
+  }, [currentIndex, currentChallengeCode, challenge.starter]);
+
+  const extractParamName = (solution: string): string | null => {
+    const match = solution.match(/\((\w+)\)/);
+    return match ? match[1] : null;
+  };
 
   const runTests = () => {
     const results = challenge.tests.map((test) => {
       try {
         // In a real implementation, this would safely execute the code
         // For now, we'll just check if the solution is close
-        const hasSolution = code.includes(challenge.solution.split('(')[1].split(')')[0]);
+        const paramName = extractParamName(challenge.solution);
+        const hasSolution = paramName ? code.includes(paramName) : false;
         return {
           passed: hasSolution,
           message: hasSolution ? `✓ Test passed: ${test.input} => ${test.expected}` : `✗ Test failed: ${test.input}`,
