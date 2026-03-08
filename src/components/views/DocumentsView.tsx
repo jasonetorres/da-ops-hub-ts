@@ -109,32 +109,33 @@ export default function DocumentsView() {
                   >
                     {/* Simple markdown rendering */}
                     {doc.content.split('\n').map((line: any, idx: any) => {
+                      const lineKey = `${doc.id}-${idx}-${line.substring(0, 20)}`;
                       if (line.startsWith('# ')) {
                         return (
-                          <h2 key={idx} style={{ margin: '12px 0 8px 0', fontSize: '14px', fontWeight: '700' }}>
+                          <h2 key={lineKey} style={{ margin: '12px 0 8px 0', fontSize: '14px', fontWeight: '700' }}>
                             {line.substring(2)}
                           </h2>
                         );
                       }
                       if (line.startsWith('## ')) {
                         return (
-                          <h3 key={idx} style={{ margin: '10px 0 6px 0', fontSize: '12px', fontWeight: '700' }}>
+                          <h3 key={lineKey} style={{ margin: '10px 0 6px 0', fontSize: '12px', fontWeight: '700' }}>
                             {line.substring(3)}
                           </h3>
                         );
                       }
                       if (line.startsWith('- ')) {
                         return (
-                          <div key={idx} style={{ marginLeft: '12px', marginBottom: '4px' }}>
+                          <div key={lineKey} style={{ marginLeft: '12px', marginBottom: '4px' }}>
                             • {line.substring(2)}
                           </div>
                         );
                       }
                       if (line.trim() === '') {
-                        return <div key={idx} style={{ height: '8px' }} />;
+                        return <div key={lineKey} style={{ height: '8px' }} />;
                       }
                       return (
-                        <p key={idx} style={{ margin: '0 0 6px 0' }}>
+                        <p key={lineKey} style={{ margin: '0 0 6px 0' }}>
                           {line}
                         </p>
                       );
