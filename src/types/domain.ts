@@ -229,3 +229,49 @@ export interface CommunityQuestion {
   status: QAStatus;
   notes: string;
 }
+
+// ─── Discord Analytics ─────────────────────────────────────────────────────
+
+export interface DiscordGuildInfo {
+  name: string;
+  memberCount: number;
+  boostTier: number;
+  boostCount: number;
+  iconURL: string | null;
+  channelCount: number;
+  voiceChannelCount: number;
+  roleCount: number;
+  lastUpdated: string;
+}
+
+export interface DiscordChannelStat {
+  id: string;
+  name: string;
+  messageCount: number;
+  lastActivity: string | null;
+}
+
+export interface DiscordRoleStat {
+  id: string;
+  name: string;
+  memberCount: number;
+  color: string;
+}
+
+export interface DiscordEngagement {
+  totalMessages: number;
+  uniqueCommunicators: number;
+  activeChannels: number;
+  avgMessagesPerDay: number;
+  lastUpdated: string;
+}
+
+export interface DiscordAnalytics {
+  guildInfo: DiscordGuildInfo | null;
+  topChannels: DiscordChannelStat[];
+  roles: DiscordRoleStat[];
+  activityByDay: Record<string, number>;
+  activityByHour: Record<string, number>;
+  engagement: DiscordEngagement | null;
+  memberSnapshots: Record<string, number>; // YYYY-MM-DD → memberCount
+}

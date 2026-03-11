@@ -1,6 +1,7 @@
 import { database, ref, onValue, set, isFirebaseConfigured } from '../config/firebase';
 import type { DataState } from '../stores/dataStore';
 import { useDataStore } from '../stores/dataStore';
+import type { DiscordAnalytics } from '../types/domain';
 
 const DATA_PATH = 'da-ops-hub-data';
 
@@ -24,8 +25,8 @@ export function initializeFirebaseSync() {
       (snapshot) => {
         if (snapshot.exists()) {
           const firebaseData = snapshot.val();
-          // Update only data properties, preserving action functions
-          // Use shallow merge (no replace: true) to preserve actions
+
+          // Update ops hub data (preserving action functions via shallow merge)
           useDataStore.setState({
             champions: firebaseData.champions,
             content: firebaseData.content,
@@ -39,6 +40,25 @@ export function initializeFirebaseSync() {
             documents: firebaseData.documents,
             resources: firebaseData.resources,
           });
+
+          // Merge Discord analytics written by the collector bot (read-only in ops hub)
+          if (firebaseData.discordAnalytics) {
+            const da = firebaseData.discordAnalytics;
+            const analytics: Partial<DiscordAnalytics> = {
+              guildInfo:    da.guildInfo    ?? null,
+              engagement:   da.engagement   ?? null,
+              activityByDay:  da.activityByDay  ?? {},
+              activityByHour: da.activityByHour ?? {},
+              memberSnapshots: da.memberSnapshots ?? {},
+              topChannels: Array.isArray(da.topChannels)
+                ? da.topChannels
+                : Object.values(da.topChannels ?? {}),
+              roles: Array.isArray(da.roles)
+                ? da.roles
+                : Object.values(da.roles ?? {}),
+            };
+            useDataStore.getState().setDiscordAnalytics(analytics);
+          }
         }
       },
       (error) => {
@@ -52,23 +72,18 @@ export function initializeFirebaseSync() {
 }
 
 /**
- * Sync data to Firebase
- * Called whenever data changes in Zustand store
- * Gracefully degrades if Firebase is not configured
- *
- * Only syncs serializable data, not action functions
+ * Sync ops hub data to Firebase.
+ * NOTE: discordAnalytics is intentionally excluded —
+ * it is written by the collector bot and must not be overwritten from the ops hub.
  */
 export async function syncDataToFirebase(data: DataState) {
   if (!isFirebaseConfigured || !database) {
-    // Firebase not configured - that's ok, localStorage will persist data
     return;
   }
 
   try {
     const dataRef = ref(database, DATA_PATH);
 
-    // Extract only the data properties (not functions)
-    // Firebase can only store JSON-serializable values
     const serializableData = {
       champions: data.champions,
       content: data.content,
@@ -86,7 +101,6 @@ export async function syncDataToFirebase(data: DataState) {
     await set(dataRef, serializableData);
   } catch (error) {
     console.error('Firebase sync write error:', error);
-    // Data still updates locally, Firebase sync just failed
   }
 }
 
@@ -105,7 +119,6 @@ export function getFirebaseStatus() {
         unsubscribe();
         resolve(snapshot.val() === true);
       });
-      // Timeout after 3 seconds
       setTimeout(() => resolve(false), 3000);
     });
   } catch (error) {

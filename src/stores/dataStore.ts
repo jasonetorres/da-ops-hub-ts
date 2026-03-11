@@ -15,6 +15,7 @@ import type {
   Resource,
   CommunityQuestion,
   Phase,
+  DiscordAnalytics,
 } from '../types/domain';
 import {
   SEED_CHAMPIONS,
@@ -104,6 +105,10 @@ export interface DataState {
   updateCommunityQuestion: (id: string, updates: Partial<CommunityQuestion>) => void;
   deleteCommunityQuestion: (id: string) => void;
   updateQuestionEngagement: (id: string, upvotes?: number, reshares?: number, replies?: number) => void;
+
+  // Discord Analytics (read-only from Firebase — written by the bot)
+  discordAnalytics: DiscordAnalytics;
+  setDiscordAnalytics: (data: Partial<DiscordAnalytics>) => void;
 }
 
 interface DataStore extends DataState {
@@ -414,6 +419,19 @@ export const useDataStore = create<DataStore>()(
               : q
           ),
         })),
+
+      // Discord Analytics (read-only; bot pushes to Firebase, we consume here)
+      discordAnalytics: {
+        guildInfo:       null,
+        topChannels:     [],
+        roles:           [],
+        activityByDay:   {},
+        activityByHour:  {},
+        engagement:      null,
+        memberSnapshots: {},
+      },
+      setDiscordAnalytics: (data) =>
+        set((state) => ({ discordAnalytics: { ...state.discordAnalytics, ...data } })),
     }),
     {
       name: 'da-ops-hub-data',
