@@ -21,6 +21,7 @@ import OKRsDashboardView from './components/views/OKRsDashboardView';
 import DocumentsView from './components/views/DocumentsView';
 import ProgressDashboardView from './components/views/ProgressDashboardView';
 import ToolsAndResourcesView from './components/views/ToolsAndResourcesView';
+import DiscordIntelView from './components/views/DiscordIntelView';
 
 function App() {
   const { currentTab, setCurrentTab } = useAppStore();
@@ -67,6 +68,7 @@ function App() {
       case 'documents': return <DocumentsView />;
       case 'progress': return <ProgressDashboardView />;
       case 'tools-resources': return <ToolsAndResourcesView />;
+      case 'discord-intel': return <DiscordIntelView />;
       default: return <OverviewView />;
     }
   };

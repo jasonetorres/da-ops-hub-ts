@@ -77,6 +77,7 @@ export const NAV_ITEMS = [
   { id: 'champions', icon: '🏆', label: 'Champions CRM' },
   { id: 'content', icon: '📝', label: 'Content Pipeline' },
   { id: 'signals', icon: '📡', label: 'Community Signals' },
+  { id: 'discord-intel', icon: '💬', label: 'Discord Intel' },
   { id: 'qa', icon: '❓', label: 'Community Q&A' },
   { id: 'tracker', icon: '🎯', label: '30·60·90 Tracker' },
   { id: 'intel', icon: '⚔️', label: 'Competitive Intel' },
