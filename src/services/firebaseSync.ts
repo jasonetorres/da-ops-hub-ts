@@ -4,6 +4,7 @@ import { useDataStore } from '../stores/dataStore';
 import type { DiscordAnalytics } from '../types/domain';
 
 const DATA_PATH = 'da-ops-hub-data';
+const DISCORD_PATH = 'discordAnalytics';
 
 /**
  * Initialize Firebase real-time sync
@@ -41,28 +42,39 @@ export function initializeFirebaseSync() {
             resources: firebaseData.resources,
           });
 
-          // Merge Discord analytics written by the collector bot (read-only in ops hub)
-          if (firebaseData.discordAnalytics) {
-            const da = firebaseData.discordAnalytics;
-            const analytics: Partial<DiscordAnalytics> = {
-              guildInfo:    da.guildInfo    ?? null,
-              engagement:   da.engagement   ?? null,
-              activityByDay:  da.activityByDay  ?? {},
-              activityByHour: da.activityByHour ?? {},
-              memberSnapshots: da.memberSnapshots ?? {},
-              topChannels: Array.isArray(da.topChannels)
-                ? da.topChannels
-                : Object.values(da.topChannels ?? {}),
-              roles: Array.isArray(da.roles)
-                ? da.roles
-                : Object.values(da.roles ?? {}),
-            };
-            useDataStore.getState().setDiscordAnalytics(analytics);
-          }
         }
       },
       (error) => {
         console.warn('Firebase sync listen error:', error);
+      }
+    );
+
+    // Separate listener for Discord analytics (written by bot at root level,
+    // never touched by syncDataToFirebase so it won't get overwritten)
+    const discordRef = ref(database, DISCORD_PATH);
+    onValue(
+      discordRef,
+      (snapshot) => {
+        if (snapshot.exists()) {
+          const da = snapshot.val();
+          const analytics: Partial<DiscordAnalytics> = {
+            guildInfo:       da.guildInfo       ?? null,
+            engagement:      da.engagement      ?? null,
+            activityByDay:   da.activityByDay   ?? {},
+            activityByHour:  da.activityByHour  ?? {},
+            memberSnapshots: da.memberSnapshots ?? {},
+            topChannels: Array.isArray(da.topChannels)
+              ? da.topChannels
+              : Object.values(da.topChannels ?? {}),
+            roles: Array.isArray(da.roles)
+              ? da.roles
+              : Object.values(da.roles ?? {}),
+          };
+          useDataStore.getState().setDiscordAnalytics(analytics);
+        }
+      },
+      (error) => {
+        console.warn('Firebase discord sync listen error:', error);
       }
     );
   } catch (error) {
