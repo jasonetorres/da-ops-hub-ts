@@ -14,6 +14,7 @@ export const PLATFORMS = [
   'LinkedIn',
   'Discord',
   'Dev.to',
+  'BlueSky',
 ];
 
 export const SIGNAL_SOURCES = [
@@ -24,6 +25,7 @@ export const SIGNAL_SOURCES = [
   'Stack Overflow',
   'Discord',
   'Blog Comment',
+  'BlueSky',
 ];
 
 export const COMPETITORS = [
@@ -91,6 +93,7 @@ export const NAV_ITEMS = [
   { id: 'documents', icon: '📄', label: 'Documents' },
   { id: 'progress', icon: '📈', label: 'Progress Dashboard' },
   { id: 'tools-resources', icon: '🔗', label: 'Tools & Resources' },
+  { id: 'monitoring', icon: '🛰️', label: 'DA Mission Control' },
 ];
 
 // News Sources

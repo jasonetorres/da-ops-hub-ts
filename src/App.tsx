@@ -22,6 +22,7 @@ import DocumentsView from './components/views/DocumentsView';
 import ProgressDashboardView from './components/views/ProgressDashboardView';
 import ToolsAndResourcesView from './components/views/ToolsAndResourcesView';
 import DiscordIntelView from './components/views/DiscordIntelView';
+import MonitoringView from './components/views/MonitoringView';
 
 function App() {
   const { currentTab, setCurrentTab } = useAppStore();
@@ -69,6 +70,7 @@ function App() {
       case 'progress': return <ProgressDashboardView />;
       case 'tools-resources': return <ToolsAndResourcesView />;
       case 'discord-intel': return <DiscordIntelView />;
+      case 'monitoring': return <MonitoringView />;
       default: return <OverviewView />;
     }
   };
