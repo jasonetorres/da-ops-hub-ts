@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "instructions": "Update this file every Friday EOD. I can generate a new version from our session recap. Commit and push — viewable from GitHub on any device.",
+    "format_version": "1.0"
+  },
+  "current_week": {
+    "week_of": "2026-03-16",
+    "week_ending": "2026-03-21",
+    "day_in_role": 1,
+    "phase": "Days 1–30: Listen, Learn & Land",
+    "status": "on-track",
+    "summary": "First week — onboarding, tool setup, and Amsterdam content production prep. Shipped DA Ops Hub v2.0 with real YouTrack intel and Mission Control monitoring tab.",
+    "shipped": [
+      "DA Ops Hub v2.0 — real YouTrack signals (9 issues), 5 champion targets, 10 milestones, DA Mission Control tab",
+      "State of the WebStorm Community memo v0.2 drafted",
+      "YouTrack WEB audit completed — top signals documented with vote counts",
+      "Amsterdam video production doc reviewed — prepped for Mar 23-27 trip"
+    ],
+    "in_progress": [
+      "Craig Walker meeting prep (~Mar 18)",
+      "Amsterdam content preparation: Future of Software Engineering podcast talking points",
+      "Amsterdam content preparation: WebStorm Release Livestream segment prep (TS, React, Vue, Svelte)",
+      "Community champion longlist — 5 of 20 identified"
+    ],
+    "blockers": [
+      "Slack channel access — need to confirm all channels are joined",
+      "YouTrack EVAN project access — need to verify",
+      "Web Head of Ecosystem name TBD"
+    ],
+    "next_week_priorities": [
+      "Craig Walker 1:1 — establish product bridge relationship",
+      "Amsterdam trip: film 4 content pieces (Mar 23-27)",
+      "WebStorm Release Livestream: own TS, React, Vue, Svelte segments (Mar 25)",
+      "Start outreach to first JBCC candidate"
+    ],
+    "okr_pulse": {
+      "kr_signals_documented": { "target": 20, "current": 9, "unit": "YouTrack signals logged" },
+      "kr_champions_identified": { "target": 20, "current": 5, "unit": "community champions mapped" },
+      "kr_content_published": { "target": 1, "current": 0, "unit": "pieces published", "notes": "Amsterdam livestream Mar 25 will be first" },
+      "kr_jbcc_relationships": { "target": 5, "current": 0, "unit": "JBCCs initiated" }
+    },
+    "competitive_pulse": [
+      "Cursor continues aggressive YouTube content (daily shorts format)",
+      "Zed gaining traction in HN discussions — performance angle resonating",
+      "VS Code Copilot integration driving retention — AI is table stakes now",
+      "Windsurf positioning on 'flow state' — differentiated from raw speed angle"
+    ],
+    "top_community_signals": [
+      "WEB-535720: Show used imports only (211 votes) — biggest pain point",
+      "WEB-3401957: Playwright support (177 votes) — testing gap vs Cursor",
+      "WEB-3506564: Performance/startup speed (119 votes) — competitive vulnerability",
+      "WEB-4559039: Figma integration (113 votes) — design handoff workflow gap"
+    ]
+  },
+  "history": []
+}

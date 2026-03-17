@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "last_updated": "2026-03-17",
+    "start_date": "2026-03-17",
+    "day_30_target": "2026-04-16",
+    "day_60_target": "2026-05-16",
+    "day_90_target": "2026-06-15",
+    "notes": "Based on Jan's onboarding doc. Update 'done' field as items complete."
+  },
+  "phases": [
+    {
+      "phase": "Days 1–30: Listen, Learn & Land",
+      "summary": "Full immersion — understand the product, team, community, competitive landscape. Land a quick win.",
+      "sections": [
+        {
+          "title": "Week 1: Setup & Access",
+          "items": [
+            { "id": "w1-01", "task": "Set up WebStorm as primary IDE", "done": true },
+            { "id": "w1-02", "task": "Join #advocates-only Slack", "done": false },
+            { "id": "w1-03", "task": "Join #ask-the-advocates Slack", "done": false },
+            { "id": "w1-04", "task": "Join #advocacy-coffee Slack", "done": false },
+            { "id": "w1-05", "task": "Join #webstorm-internal Slack", "done": false },
+            { "id": "w1-06", "task": "Join #webstorm-duties Slack", "done": false },
+            { "id": "w1-07", "task": "Join #webstorm-product Slack", "done": false },
+            { "id": "w1-08", "task": "Get YouTrack access — bookmark WebStorm board", "done": false },
+            { "id": "w1-09", "task": "Set up Hector standup command: /hector standup adv add [update] [ticket]", "done": false },
+            { "id": "w1-10", "task": "Log into HiBob (HR platform — PTO, sick leave, goals)", "done": false },
+            { "id": "w1-11", "task": "Read the Advocate's Manifesto", "done": false },
+            { "id": "w1-12", "task": "Read WebStorm roadmap and strategy docs", "done": false }
+          ]
+        },
+        {
+          "title": "Week 1–2: Internal Onboarding",
+          "items": [
+            { "id": "w12-01", "task": "Meet Helen Scott (Head of Advocacy)", "done": false },
+            { "id": "w12-02", "task": "Meet Vlad Minaev (WebStorm Team Lead)", "done": false },
+            { "id": "w12-03", "task": "Meet Craig Walker (WebStorm Product Manager)", "done": false, "notes": "Meeting ~Mar 18" },
+            { "id": "w12-04", "task": "Meet Kristina Pchelintseva (WebStorm Product Manager)", "done": false },
+            { "id": "w12-05", "task": "Meet Web Head of Ecosystem (TBD — find out who this is)", "done": false },
+            { "id": "w12-06", "task": "Meet WebStorm Product Marketing Manager (TBD)", "done": false },
+            { "id": "w12-07", "task": "Attend demo, stand-up (if timezone allows), and team calls", "done": false },
+            { "id": "w12-08", "task": "Review internal docs: positioning, past campaigns, strategy", "done": false },
+            { "id": "w12-09", "task": "Browse open YouTrack tickets — get a feel for community frustrations", "done": true, "notes": "Completed — 9 signals documented" },
+            { "id": "w12-10", "task": "Start planning a piece of content — aim for a quick win", "done": true, "notes": "Amsterdam content planned: podcast + livestream" }
+          ]
+        },
+        {
+          "title": "Week 3–4: External Listening",
+          "items": [
+            { "id": "w34-01", "task": "Audit WebStorm content channels: blog, YouTube, social", "done": false },
+            { "id": "w34-02", "task": "Deep dive into Reddit, Discord servers, Twitter/X, BlueSky, LinkedIn", "done": false },
+            { "id": "w34-03", "task": "Identify 20 most influential WebStorm community members (check with Marketing for baseline)", "done": false, "notes": "5 champions identified so far" },
+            { "id": "w34-04", "task": "Competitive review: what Cursor, VS Code, and Zed advocates are publishing", "done": false },
+            { "id": "w34-05", "task": "Publish first piece of content — visible win internally and externally", "done": false, "notes": "Amsterdam livestream Mar 25 will be this" }
+          ]
+        },
+        {
+          "title": "Day 30 Deliverables",
+          "target_date": "2026-04-16",
+          "items": [
+            { "id": "d30-01", "task": "State of the WebStorm Community memo", "done": false, "notes": "v0.2 memo drafted — needs final polish" },
+            { "id": "d30-02", "task": "Competitive Content Gap Analysis", "done": false },
+            { "id": "d30-03", "task": "Community Champion Longlist (20 devs mapped by platform, audience, alignment)", "done": false, "notes": "5 identified, need 15 more" }
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "Days 31–60: Build & Begin",
+      "summary": "Find your role in the community and build the product bridge.",
+      "sections": [
+        {
+          "title": "Content Track",
+          "items": [
+            { "id": "d60c-01", "task": "First video tutorial produced and published to YouTube", "done": false },
+            { "id": "d60c-02", "task": "Draft content calendar for next 60 days with 3 content pillars defined", "done": false }
+          ]
+        },
+        {
+          "title": "Community Track",
+          "items": [
+            { "id": "d60com-01", "task": "Active daily presence on Reddit, Dev.to, Twitter/X", "done": false },
+            { "id": "d60com-02", "task": "Initiate relationships with first 5 JBCCs (JetBrains Community Contributors)", "done": false },
+            { "id": "d60com-03", "task": "Submit first conference talk (React Conf, VueConf, or framework-specific — in agreement with WebStorm Team / Head of Ecosystem)", "done": false }
+          ]
+        },
+        {
+          "title": "Product Bridge Track",
+          "items": [
+            { "id": "d60pb-01", "task": "Deliver first community insights report to product team (3 pain points with evidence)", "done": false },
+            { "id": "d60pb-02", "task": "Establish weekly sync with product managers", "done": false },
+            { "id": "d60pb-03", "task": "Identify 3 WebStorm improvements developers would talk about if they knew they were coming", "done": false }
+          ]
+        },
+        {
+          "title": "Day 60 Deliverables",
+          "target_date": "2026-05-16",
+          "items": [
+            { "id": "d60-01", "task": "Published video content pieces", "done": false },
+            { "id": "d60-02", "task": "First conference talk abstract submitted", "done": false },
+            { "id": "d60-03", "task": "Community Engagement Framework (documented playbook for how JetBrains/WebStorm engages in community spaces)", "done": false }
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "Days 61–90: Impact & Scale",
+      "summary": "Content becomes a series, community relationships compound, strategy gets formalized.",
+      "sections": [
+        {
+          "title": "Content: Launch a Series",
+          "items": [
+            { "id": "d90c-01", "task": "Plan and start 3-part content series (e.g. 'WebStorm Mastery' or 'AI + WebStorm for Real Teams')", "done": false },
+            { "id": "d90c-02", "task": "Ship at least one piece that earns external links, shares, or community discussion", "done": false },
+            { "id": "d90c-03", "task": "Establish weekly or bi-weekly publishing cadence for rest of year", "done": false }
+          ]
+        },
+        {
+          "title": "Community: Programs & Speaking",
+          "items": [
+            { "id": "d90com-01", "task": "Grow WebStorm community presence (JBCC / Discord / Reddit)", "done": false }
+          ]
+        },
+        {
+          "title": "Strategy: OKRs & North Star",
+          "items": [
+            { "id": "d90s-01", "task": "Propose clear OKRs for rest of year: content output, community growth, feedback volume", "done": false },
+            { "id": "d90s-02", "task": "Synthesize 90 days of community data into strategic roadmap recommendations for product team", "done": false },
+            { "id": "d90s-03", "task": "Present 'State of WebStorm Advocacy' — what's working, what's not, what's next", "done": false }
+          ]
+        },
+        {
+          "title": "Day 90 Deliverables",
+          "target_date": "2026-06-15",
+          "items": [
+            { "id": "d90-01", "task": "Content series concept (3+ pieces) with engagement metrics and repeatable production workflow", "done": false },
+            { "id": "d90-02", "task": "5+ JBCCs onboarded", "done": false },
+            { "id": "d90-03", "task": "OKRs + Annual Advocacy Plan", "done": false }
+          ]
+        }
+      ]
+    }
+  ]
+}

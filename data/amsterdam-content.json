@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "title": "Amsterdam Video Content",
+    "dates": "2026-03-23 to 2026-03-27",
+    "location": "Amsterdam TT Room TBD",
+    "last_updated": "2026-03-17"
+  },
+  "pieces": [
+    {
+      "id": "future-of-software-engineering",
+      "title": "Future of Software Engineering",
+      "format": "Podcast — three-person conversation (no host/guest hierarchy)",
+      "goal": "Position JetBrains as a thought leader actively thinking about the future of software engineering",
+      "participants": ["Jan-Niklas Wortmann", "Jason Torres", "Vitaly Bragilevsky"],
+      "filming_date": "2026-03-24",
+      "filming_time": "TBD",
+      "final_length_min": 45,
+      "final_length_max": 60,
+      "youtrack_ticket": "EVAN-17155",
+      "status": "pre-production",
+      "jason_segments": ["Full conversation participant"],
+      "distribution": ["YouTube", "Shorts", "LinkedIn", "Twitter/X", "Instagram", "TikTok"],
+      "topics_to_avoid": ["Sensitive areas", "competitor mentions", "NDA items"],
+      "talking_points": "TBD — to be prepared before Mar 24",
+      "post_production": {
+        "editor": "TBD",
+        "notes": "Shorts cutdowns for LinkedIn, Twitter, Instagram, TikTok"
+      }
+    },
+    {
+      "id": "experimental-ai-features",
+      "title": "Experimental AI Features",
+      "format": "Sit-down interview",
+      "goal": "Build awareness around IntelliJ Next and excite developers for upcoming features",
+      "participants": ["Jan-Niklas Wortmann", "Anastasiia Kapanina"],
+      "filming_date": "2026-03-24",
+      "filming_time": "TBD",
+      "final_length_min": 10,
+      "final_length_max": 20,
+      "youtrack_ticket": "TBD",
+      "status": "pre-production",
+      "jason_segments": [],
+      "distribution": ["YouTube", "Shorts", "Instagram", "TikTok"],
+      "topics_to_avoid": ["Sensitive areas", "competitor mentions", "NDA items"],
+      "post_production": {
+        "editor": "TBD"
+      }
+    },
+    {
+      "id": "google-gemini-announcement",
+      "title": "Google Gemini Integration Announcement",
+      "format": "Release announcement video",
+      "goal": "Announce Google Gemini integration in JetBrains AI",
+      "participants": ["Jan-Niklas Wortmann"],
+      "filming_date": "2026-03-24",
+      "filming_time": "TBD",
+      "final_length_min": 3,
+      "final_length_max": 8,
+      "youtrack_ticket": "TBD",
+      "status": "pre-production",
+      "jason_segments": [],
+      "distribution": ["YouTube", "LinkedIn"],
+      "post_production": {
+        "editor": "TBD"
+      }
+    },
+    {
+      "id": "webstorm-release-livestream",
+      "title": "WebStorm Release Livestream",
+      "format": "YouTube Livestream",
+      "goal": "Launch Hype — live release coverage with community",
+      "participants": ["Jan-Niklas Wortmann", "Jason Torres"],
+      "filming_date": "2026-03-25",
+      "filming_time": "TBD",
+      "final_length_min": 55,
+      "final_length_max": 65,
+      "youtrack_ticket": "TBD",
+      "status": "pre-production",
+      "jason_segments": [
+        "Intro & welcome (with Jan)",
+        "Better TypeScript support",
+        "New React directives",
+        "Vue",
+        "Svelte"
+      ],
+      "jan_segments": [
+        "Overview",
+        "New AI Features",
+        "Angular 21 template updates",
+        "Astro"
+      ],
+      "run_of_show": [
+        { "time": "00:00", "segment": "Intro & welcome", "owner": "Jason Torres + Jan-Niklas Wortmann" },
+        { "time": "05:00", "segment": "Overview", "owner": "Jan-Niklas Wortmann" },
+        { "time": "TBD",   "segment": "Better TypeScript support", "owner": "Jason Torres" },
+        { "time": "TBD",   "segment": "New AI Features", "owner": "Jan-Niklas Wortmann" },
+        { "time": "TBD",   "segment": "New React directives", "owner": "Jason Torres" },
+        { "time": "TBD",   "segment": "Angular 21 template updates", "owner": "Jan-Niklas Wortmann" },
+        { "time": "TBD",   "segment": "Vue", "owner": "Jason Torres" },
+        { "time": "TBD",   "segment": "Astro", "owner": "Jan-Niklas Wortmann" },
+        { "time": "TBD",   "segment": "Svelte", "owner": "Jason Torres" },
+        { "time": "00:55", "segment": "Wrap-up & CTA", "owner": "Jason Torres + Jan-Niklas Wortmann" }
+      ],
+      "distribution": ["YouTube", "Shorts (maybe)"],
+      "post_production": {
+        "editor": "TBD"
+      },
+      "prep_notes": "Need to demo: TypeScript improvements, React directives, Vue updates, Svelte support. Coordinate with Jan on transitions and handoffs."
+    }
+  ]
+}

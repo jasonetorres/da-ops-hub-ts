@@ -1,0 +1,135 @@
+{
+  "meta": {
+    "last_updated": "2026-03-17",
+    "notes": "Tools, links, and channels from Jan's onboarding doc"
+  },
+  "tools": [
+    {
+      "name": "YouTrack",
+      "url": "https://youtrack.jetbrains.com/issues/WEB",
+      "purpose": "Project management and issue tracking. Track tasks, review community-reported issues and feature requests, coordinate with product team.",
+      "priority": "daily"
+    },
+    {
+      "name": "HiBob",
+      "url": "https://app.hibob.com/home",
+      "purpose": "HR platform — PTO requests, sick leave, goal documentation.",
+      "priority": "as-needed"
+    },
+    {
+      "name": "Hector (Slack Bot)",
+      "url": null,
+      "purpose": "Surfaces DA work to stakeholders. Use daily to log standups.",
+      "command": "/hector standup adv add [THE THING YOU DID] [EVAN-XXXX]",
+      "priority": "daily",
+      "notes": "Critical for internal visibility. Run this every day you ship something or make progress."
+    }
+  ],
+  "slack_channels": [
+    {
+      "channel": "#advocates-only",
+      "purpose": "Internal advocacy team channel. Updates, strategy coordination, initiative discussions.",
+      "priority": "high"
+    },
+    {
+      "channel": "#ask-the-advocates",
+      "purpose": "Other JetBrains teams reach out with questions, requests, or collaboration ideas. Monitor actively.",
+      "priority": "high"
+    },
+    {
+      "channel": "#advocacy-coffee",
+      "purpose": "Informal hangout, non-work chat, random links, general vibes.",
+      "priority": "low"
+    },
+    {
+      "channel": "#webstorm-internal",
+      "purpose": "Cross-functional channel — product, engineering, marketing, and advocacy all here. Day-to-day WebStorm comms.",
+      "priority": "high"
+    },
+    {
+      "channel": "#webstorm-duties",
+      "purpose": "Operational support requests related to WebStorm. Good signal for ongoing issues and user pain points.",
+      "priority": "medium"
+    },
+    {
+      "channel": "#webstorm-product",
+      "purpose": "Product-focused: roadmap updates, feature planning, release coordination. Primary bridge-building channel.",
+      "priority": "high"
+    }
+  ],
+  "external_links": [
+    {
+      "name": "WebStorm Blog",
+      "url": "https://blog.jetbrains.com/webstorm/",
+      "purpose": "Official blog — content audit, past campaigns, publishing destination"
+    },
+    {
+      "name": "WebStorm YouTrack (WEB project)",
+      "url": "https://youtrack.jetbrains.com/issues/WEB",
+      "purpose": "Community signal source — votes, comments, pain points. Twice-weekly scrub."
+    },
+    {
+      "name": "JetBrains Discord",
+      "url": "https://discord.gg/jetbrains",
+      "purpose": "Community engagement. Active presence required."
+    },
+    {
+      "name": "JetBrains Reddit",
+      "url": "https://www.reddit.com/r/Jetbrains/",
+      "purpose": "Community engagement and competitive intel source."
+    },
+    {
+      "name": "Advocate's Manifesto",
+      "url": "internal — see Notion",
+      "purpose": "How JetBrains thinks about advocacy. Required reading."
+    },
+    {
+      "name": "WebStorm Roadmap",
+      "url": "internal — TBD",
+      "purpose": "Product roadmap access — request from Craig/Kristina"
+    },
+    {
+      "name": "WebStorm Strategy Doc",
+      "url": "internal — TBD",
+      "purpose": "Positioning and strategy — request access in first 2 weeks"
+    }
+  ],
+  "community_monitoring": [
+    {
+      "source": "r/Jetbrains",
+      "url": "https://www.reddit.com/r/Jetbrains/",
+      "cadence": "2x week",
+      "signal_type": "community sentiment, pain points, competitive mentions"
+    },
+    {
+      "source": "r/webdev",
+      "url": "https://www.reddit.com/r/webdev/",
+      "cadence": "2x week",
+      "signal_type": "editor discussions, competitive intel, JS/TS trends"
+    },
+    {
+      "source": "r/javascript",
+      "url": "https://www.reddit.com/r/javascript/",
+      "cadence": "weekly",
+      "signal_type": "JS ecosystem trends, tool discussions"
+    },
+    {
+      "source": "Twitter/X search: 'WebStorm'",
+      "url": "https://twitter.com/search?q=WebStorm",
+      "cadence": "2x week",
+      "signal_type": "real-time mentions, competitor comparisons"
+    },
+    {
+      "source": "BlueSky search: 'WebStorm'",
+      "url": "https://bsky.app",
+      "cadence": "weekly",
+      "signal_type": "growing dev community, early adopter signal"
+    },
+    {
+      "source": "Hacker News: 'WebStorm' / 'JetBrains'",
+      "url": "https://hn.algolia.com/?q=webstorm",
+      "cadence": "weekly",
+      "signal_type": "technical community, high-signal discussions"
+    }
+  ]
+}

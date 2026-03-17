@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "last_updated": "2026-03-17",
+    "notes": "Key contacts from Jan's onboarding doc + Amsterdam production doc"
+  },
+  "internal": [
+    {
+      "name": "Helen Scott",
+      "role": "Head of Advocacy",
+      "team": "Developer Advocacy",
+      "priority": "high",
+      "notes": "Direct manager / head of team. Meet in Week 1-2."
+    },
+    {
+      "name": "Jan-Niklas Wortmann",
+      "role": "Developer Advocate (WebStorm / JS/TS lead)",
+      "team": "Developer Advocacy",
+      "twitter": "@jnwortmann",
+      "priority": "high",
+      "notes": "Primary collaborator. Co-host on Amsterdam podcast, WebStorm Release Livestream. Peer and main onboarding buddy."
+    },
+    {
+      "name": "Vitaly Bragilevsky",
+      "role": "Developer Advocate",
+      "team": "Developer Advocacy",
+      "priority": "medium",
+      "notes": "Co-participant in Future of Software Engineering podcast at Amsterdam (Mar 24)."
+    },
+    {
+      "name": "Anastasiia Kapanina",
+      "role": "TBD (Experimental AI Features interview subject)",
+      "team": "TBD — likely Product or Engineering",
+      "priority": "medium",
+      "notes": "Featured in Experimental AI Features interview at Amsterdam (Mar 24). Follow up to understand her role and team."
+    },
+    {
+      "name": "Vlad Minaev",
+      "role": "WebStorm Team Lead",
+      "team": "WebStorm Engineering",
+      "priority": "high",
+      "notes": "Key product bridge contact. Meet in Week 1-2. Engineering perspective on roadmap."
+    },
+    {
+      "name": "Craig Walker",
+      "role": "WebStorm Product Manager",
+      "team": "WebStorm Product",
+      "priority": "high",
+      "notes": "Primary PM contact. Meeting scheduled ~Mar 18. Critical for product bridge track — weekly sync goal by Day 60."
+    },
+    {
+      "name": "Kristina Pchelintseva",
+      "role": "WebStorm Product Manager",
+      "team": "WebStorm Product",
+      "priority": "high",
+      "notes": "Second PM contact. Meet in Week 1-2."
+    },
+    {
+      "name": "TBD",
+      "role": "Web Head of Ecosystem",
+      "team": "Ecosystem",
+      "priority": "high",
+      "notes": "Conference talk submissions need to be in agreement with this person. TBD — find out who this is."
+    },
+    {
+      "name": "TBD",
+      "role": "WebStorm Product Marketing Manager",
+      "team": "Marketing",
+      "priority": "medium",
+      "notes": "Marketing baseline for community champion list. Connect in first 30 days."
+    }
+  ],
+  "community": [
+    {
+      "name": "Theo (t3dotgg)",
+      "handle": "@t3dotgg",
+      "platform": "YouTube / Twitter/X",
+      "audience_size": "1.2M+ YouTube",
+      "alignment": "high",
+      "status": "identified",
+      "notes": "Strong TypeScript/React opinions. Potential champion target. Prioritize outreach."
+    },
+    {
+      "name": "Fireship (Jeff Delaney)",
+      "handle": "@Fireship_dev",
+      "platform": "YouTube",
+      "audience_size": "3M+ YouTube",
+      "alignment": "medium",
+      "status": "identified",
+      "notes": "Broad JS/TS reach. Tool comparisons land well with his audience. Would need a strong angle."
+    },
+    {
+      "name": "Jack Herrington",
+      "handle": "@jherr",
+      "platform": "YouTube / Twitter/X",
+      "audience_size": "200K+ YouTube",
+      "alignment": "high",
+      "status": "identified",
+      "notes": "Deep TypeScript/React expertise. Module federation specialist. Very aligned with WebStorm power user profile."
+    },
+    {
+      "name": "James Quick",
+      "handle": "@jamesqquick",
+      "platform": "YouTube / Twitter/X",
+      "audience_size": "300K+ YouTube",
+      "alignment": "medium",
+      "status": "identified",
+      "notes": "Beginner-friendly JS content. Broad reach. Good for onboarding-angle content."
+    },
+    {
+      "name": "Paul Everitt",
+      "handle": "@paulweveritt",
+      "platform": "YouTube / Twitter/X",
+      "audience_size": "JetBrains adjacent",
+      "alignment": "high",
+      "status": "identified",
+      "notes": "JetBrains ecosystem adjacent. Strong advocacy credibility. Easy first outreach candidate."
+    }
+  ]
+}
